@@ -11,13 +11,13 @@ pkg_search_module(SDL2_image REQUIRED SDL2_image>=2.0.0)
 pkg_search_module(SDL2_ttf REQUIRED SDL2_ttf>=2.0.0)
 pkg_search_module(SDL2_mixer REQUIRED SDL2_mixer>=2.0.0)
 
-include_directories(${SDL_INCLUDE_DIR} ${SDL_IMAGE_INCLUDE_DIRS} ${SDL_TTF_INCLUDE_DIRS} ${SDL_MIXER_INCLUDE_DIRS})
+include_directories(${SDL2_INCLUDE_DIRS} ${SDL_IMAGE_INCLUDE_DIRS} ${SDL2_TTF_INCLUDE_DIRS} ${SDL2_MIXER_INCLUDE_DIRS})
 
-add_executable(game src/main.cpp)
+add_executable(game src/main.cpp src/game.cpp)
 
 target_link_libraries(game
         ${LUA_LIBRARIES}
-        ${SDL_LIBRARIES}
+        ${SDL2_LIBRARIES}
         ${SDL_IMAGE_LIBRARIES}
         ${SDL_TTF_LIBRARIES}
         ${SDL_MIXER_LIBRARIES})
