@@ -1,0 +1,23 @@
+cmake_minimum_required(VERSION 3.15)
+project(game)
+
+set(CMAKE_CXX_STANDARD 14)
+
+find_package(PkgConfig REQUIRED)
+
+find_package(Lua REQUIRED)
+find_package(SDL2 REQUIRED)
+pkg_search_module(SDL2_image REQUIRED SDL2_image>=2.0.0)
+pkg_search_module(SDL2_ttf REQUIRED SDL2_ttf>=2.0.0)
+pkg_search_module(SDL2_mixer REQUIRED SDL2_mixer>=2.0.0)
+
+include_directories(${SDL_INCLUDE_DIR} ${SDL_IMAGE_INCLUDE_DIRS} ${SDL_TTF_INCLUDE_DIRS} ${SDL_MIXER_INCLUDE_DIRS})
+
+add_executable(game src/main.cpp)
+
+target_link_libraries(game
+        ${LUA_LIBRARIES}
+        ${SDL_LIBRARIES}
+        ${SDL_IMAGE_LIBRARIES}
+        ${SDL_TTF_LIBRARIES}
+        ${SDL_MIXER_LIBRARIES})
