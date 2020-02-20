@@ -19,6 +19,7 @@ class Game {
     bool running;
     SDL_Window* window;
     SDL_Renderer* renderer;
+    int ticksLastFrame;
 };
 
 #endif
