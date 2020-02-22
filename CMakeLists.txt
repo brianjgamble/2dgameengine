@@ -3,17 +3,24 @@ project(game)
 
 set(CMAKE_CXX_STANDARD 14)
 
+# Include required libraries
 find_package(PkgConfig REQUIRED)
-
 find_package(Lua REQUIRED)
 find_package(SDL2 REQUIRED)
 pkg_search_module(SDL2_image REQUIRED SDL2_image>=2.0.0)
 pkg_search_module(SDL2_ttf REQUIRED SDL2_ttf>=2.0.0)
 pkg_search_module(SDL2_mixer REQUIRED SDL2_mixer>=2.0.0)
 
-include_directories(${SDL2_INCLUDE_DIRS} ${SDL_IMAGE_INCLUDE_DIRS} ${SDL2_TTF_INCLUDE_DIRS} ${SDL2_MIXER_INCLUDE_DIRS})
+include_directories(${SDL2_INCLUDE_DIRS} ${SDL_IMAGE_INCLUDE_DIRS} $
+        {SDL2_TTF_INCLUDE_DIRS} ${SDL2_MIXER_INCLUDE_DIRS})
 
-add_executable(game src/main.cpp src/game.cpp)
+# Define the sources
+list(APPEND SOURCES
+        src/game.cpp)
+
+
+# Build the executable
+add_executable(game src/main.cpp ${SOURCES})
 
 target_link_libraries(game
         ${LUA_LIBRARIES}
