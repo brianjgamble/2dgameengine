@@ -1,7 +1,11 @@
 #include "game.h"
 #include "../lib/glm/glm.hpp"
 #include "constants.h"
+#include "entity_manager.h"
 #include <iostream>
+
+EntityManager manager;
+SDL_Renderer* Game::renderer;
 
 Game::Game() {
     running = false;
@@ -12,9 +16,6 @@ Game::~Game() {}
 bool Game::isRunning() const {
     return running;
 }
-
-glm::vec2 projectilePos = glm::vec2 {0.0f, 0.0f};
-glm::vec2 projectileVel = glm::vec2 {20.0f, 20.0f};
 
 void Game::initialize(int width, int height) {
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
@@ -76,19 +77,17 @@ void Game::update() {
     // next pass
     ticksLastFrame = SDL_GetTicks();
 
-    // Use deltaTime to update my game objects
-    projectilePos = glm::vec2 {projectilePos.x + projectileVel.x * deltaTime,
-                               projectilePos.y + projectileVel.y * deltaTime};
+    // TODO:
+    // here we call the manager.update to update all entities as
+    // a function of deltaTime
 }
 
 void Game::render() {
     SDL_SetRenderDrawColor(renderer, 21, 21, 21, 255);
     SDL_RenderClear(renderer);
 
-    SDL_Rect projectile {(int)projectilePos.x, (int)projectilePos.y, 10, 10};
-
-    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-    SDL_RenderFillRect(renderer, &projectile);
+    // TODO:
+    // here we call the amanger render to render all entities
 
     SDL_RenderPresent(renderer);
 }
@@ -98,3 +97,5 @@ void Game::destroy() {
     SDL_DestroyWindow(window);
     SDL_Quit();
 }
+
+void Game::loadLevel(int levelNumber) {}

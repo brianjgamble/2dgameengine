@@ -3,13 +3,15 @@
 
 #include <string>
 #include <vector>
+#include "entity_manager.h"
+#include "component.h"
 
 class Component;
 class EntityManager;
 
 class Entity {
   public:
-    Entity(EntityManager& manager);
+    explicit Entity(EntityManager& manager);
     Entity(EntityManager& manager, std::string name);
 
     void update(float deltaTime);

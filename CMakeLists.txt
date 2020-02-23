@@ -18,7 +18,9 @@ include_directories(${SDL2_INCLUDE_DIRS} ${SDL_IMAGE_INCLUDE_DIRS} $
 list(APPEND SOURCES
         src/game.cpp
         src/component.cpp src/component.h
-        src/entity.cpp src/entity.h)
+        src/entity.cpp src/entity.h
+        src/entity_manager.cpp src/entity_manager.h
+        src/components/transform_component.cpp src/components/transform_component.h)
 
 
 # Build the executable

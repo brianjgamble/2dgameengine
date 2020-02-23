@@ -10,6 +10,8 @@ class Game {
 
     void initialize(int width, int height);
     bool isRunning() const;
+    static SDL_Renderer* renderer;
+    void loadLevel(int levelNumber);
     void processInput();
     void update();
     void render();
@@ -18,7 +20,6 @@ class Game {
   private:
     bool running;
     SDL_Window* window;
-    SDL_Renderer* renderer;
     int ticksLastFrame;
 };
 
