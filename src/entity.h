@@ -1,10 +1,10 @@
 #ifndef GAME_ENTITY_H
 #define GAME_ENTITY_H
 
+#include "component.h"
+#include "entity_manager.h"
 #include <string>
 #include <vector>
-#include "entity_manager.h"
-#include "component.h"
 
 class Component;
 class EntityManager;
@@ -18,6 +18,8 @@ class Entity {
     void render();
     void destroy();
     bool isActive() const;
+
+    template<typename T, typename... TArgs> T& addComponent(TArgs&&... args);
 
   private:
     EntityManager& manager;
