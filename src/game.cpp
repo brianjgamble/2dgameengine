@@ -1,5 +1,6 @@
 #include "game.h"
 #include "../lib/glm/glm.hpp"
+#include "components/transform_component.h"
 #include "constants.h"
 #include "entity_manager.h"
 #include <iostream>
@@ -37,7 +38,14 @@ void Game::initialize(int width, int height) {
         return;
     }
 
+    loadLevel(0);
+
     running = true;
+}
+
+void Game::loadLevel(int levelNumber) {
+    Entity& newEntity(manager.addEntity("projectile"));
+    newEntity.addComponent<TransformComponent>(0, 0, 20, 20, 32, 32, 1);
 }
 
 void Game::processInput() {
@@ -77,17 +85,18 @@ void Game::update() {
     // next pass
     ticksLastFrame = SDL_GetTicks();
 
-    // TODO:
-    // here we call the manager.update to update all entities as
-    // a function of deltaTime
+    manager.update(deltaTime);
 }
 
 void Game::render() {
     SDL_SetRenderDrawColor(renderer, 21, 21, 21, 255);
     SDL_RenderClear(renderer);
 
-    // TODO:
-    // here we call the amanger render to render all entities
+    if (manager.hasNoEntities()) {
+        return;
+    }
+
+    manager.render();
 
     SDL_RenderPresent(renderer);
 }
@@ -97,5 +106,3 @@ void Game::destroy() {
     SDL_DestroyWindow(window);
     SDL_Quit();
 }
-
-void Game::loadLevel(int levelNumber) {}

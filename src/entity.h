@@ -19,7 +19,13 @@ class Entity {
     void destroy();
     bool isActive() const;
 
-    template<typename T, typename... TArgs> T& addComponent(TArgs&&... args);
+    template<typename T, typename... TArgs> T& addComponent(TArgs&&... args) {
+        T* newComponent(new T(std::forward<TArgs>(args)...));
+        newComponent->owner = this;
+        components.emplace_back(newComponent);
+        newComponent->initialize();
+        return *newComponent;
+    }
 
   private:
     EntityManager& manager;
