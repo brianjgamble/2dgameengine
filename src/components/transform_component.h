@@ -11,7 +11,12 @@ class TransformComponent : public Component {
 
     void initialize() override {}
     void update(float deltaTime) override;
-    void render() override;
+    void render() override {}
+
+    int getWidth() const;
+    int getHeight() const;
+    glm::vec2 getPosition() const;
+    int getScale() const;
 
   private:
     glm::vec2 position;

@@ -4,6 +4,8 @@
 #include <SDL.h>
 #include <SDL_image.h>
 
+class AssetManager;
+
 class Game {
   public:
     Game();
@@ -12,6 +14,7 @@ class Game {
     void initialize(int width, int height);
     bool isRunning() const;
     static SDL_Renderer* renderer;
+    static AssetManager* assetManager;
     void loadLevel(int levelNumber);
     void processInput();
     void update();

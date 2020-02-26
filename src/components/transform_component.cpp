@@ -1,6 +1,4 @@
 #include "transform_component.h"
-#include "../game.h"
-#include <SDL.h>
 
 TransformComponent::TransformComponent(int posX, int posY, int velX, int velY,
                                        int w, int h, int s) {
@@ -16,9 +14,18 @@ void TransformComponent::update(float deltaTime) {
     position.y += velocity.y * deltaTime;
 }
 
-void TransformComponent::render() {
-    SDL_Rect transformRectangle {(int)position.x, (int)position.y, width,
-                                 height};
-    SDL_SetRenderDrawColor(Game::renderer, 255, 255, 255, 255);
-    SDL_RenderFillRect(Game::renderer, &transformRectangle);
+int TransformComponent::getWidth() const {
+    return width;
+}
+
+int TransformComponent::getHeight() const {
+    return height;
+}
+
+glm::vec2 TransformComponent::getPosition() const {
+    return position;
+}
+
+int TransformComponent::getScale() const {
+    return scale;
 }

@@ -26,7 +26,8 @@ list(APPEND SOURCES
         src/entity_manager.cpp src/entity_manager.h
         src/components/transform_component.cpp src/components/transform_component.h
         src/texture_manager.cpp src/texture_manager.h
-        src/asset_manager.cpp src/asset_manager.h)
+        src/asset_manager.cpp src/asset_manager.h
+        src/components/sprite_component.cpp src/components/sprite_component.h)
 
 
 # Build the executable
