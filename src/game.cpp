@@ -50,6 +50,7 @@ void Game::loadLevel(int levelNumber) {
                              "./assets/images/tank-big-right.png");
     assetManager->addTexture("chopper-image",
                              "./assets/images/chopper-spritesheet.png");
+    assetManager->addTexture("radar-image", "./assets/images/radar.png");
 
     Entity& tankEntity(manager.addEntity("tank"));
     tankEntity.addComponent<TransformComponent>(0, 0, 20, 20, 32, 32, 1);
@@ -59,6 +60,11 @@ void Game::loadLevel(int levelNumber) {
     chopperEntity.addComponent<TransformComponent>(240, 106, 0, 0, 32, 32, 1);
     chopperEntity.addComponent<SpriteComponent>("chopper-image", 2, 90, true,
                                                 false);
+
+    Entity& radarEntity(manager.addEntity("Radar"));
+    radarEntity.addComponent<TransformComponent>(720, 15, 0, 0, 64, 64, 1);
+    radarEntity.addComponent<SpriteComponent>("radar-image", 8, 150, false,
+                                              true);
 }
 
 void Game::processInput() {
