@@ -18,9 +18,10 @@ class TransformComponent : public Component {
     glm::vec2 getPosition() const;
     int getScale() const;
 
+    glm::vec2 velocity;
+
   private:
     glm::vec2 position;
-    glm::vec2 velocity;
     int width;
     int height;
     int scale;

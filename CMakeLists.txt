@@ -28,7 +28,8 @@ list(APPEND SOURCES
         src/texture_manager.cpp src/texture_manager.h
         src/asset_manager.cpp src/asset_manager.h
         src/components/sprite_component.cpp src/components/sprite_component.h
-        src/animation.cpp src/animation.h)
+        src/animation.cpp src/animation.h
+        src/components/keyboard_control_component.cpp src/components/keyboard_control_component.h)
 
 
 # Build the executable

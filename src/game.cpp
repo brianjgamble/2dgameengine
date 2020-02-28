@@ -1,6 +1,7 @@
 #include "game.h"
 #include "../lib/glm/glm.hpp"
 #include "asset_manager.h"
+#include "components/keyboard_control_component.h"
 #include "components/sprite_component.h"
 #include "components/transform_component.h"
 #include "constants.h"
@@ -9,6 +10,7 @@
 EntityManager manager;
 SDL_Renderer* Game::renderer;
 AssetManager* Game::assetManager = new AssetManager(&manager);
+SDL_Event Game::event;
 
 Game::Game() {
     running = false;
@@ -52,14 +54,16 @@ void Game::loadLevel(int levelNumber) {
                              "./assets/images/chopper-spritesheet.png");
     assetManager->addTexture("radar-image", "./assets/images/radar.png");
 
-    Entity& tankEntity(manager.addEntity("tank"));
-    tankEntity.addComponent<TransformComponent>(0, 0, 20, 20, 32, 32, 1);
-    tankEntity.addComponent<SpriteComponent>("tank-image");
-
     Entity& chopperEntity(manager.addEntity("chopper"));
     chopperEntity.addComponent<TransformComponent>(240, 106, 0, 0, 32, 32, 1);
     chopperEntity.addComponent<SpriteComponent>("chopper-image", 2, 90, true,
                                                 false);
+    chopperEntity.addComponent<KeyboardControlComponent>("up", "right", "down",
+                                                         "left", "space");
+
+    Entity& tankEntity(manager.addEntity("tank"));
+    tankEntity.addComponent<TransformComponent>(0, 0, 20, 20, 32, 32, 1);
+    tankEntity.addComponent<SpriteComponent>("tank-image");
 
     Entity& radarEntity(manager.addEntity("Radar"));
     radarEntity.addComponent<TransformComponent>(720, 15, 0, 0, 64, 64, 1);
@@ -68,7 +72,6 @@ void Game::loadLevel(int levelNumber) {
 }
 
 void Game::processInput() {
-    SDL_Event event;
     SDL_PollEvent(&event);
 
     switch (event.type) {
