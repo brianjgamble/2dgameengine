@@ -8,7 +8,7 @@ class Map {
     Map(std::string textureId, int scale, int tileSize);
     ~Map() = default;
 
-    void loadMap(std::string filePath, int mapSizeX, int mapSizeY);
+    void loadMap(const std::string& filePath, int mapSizeX, int mapSizeY);
     void addTile(int sourceRectX, int sourceRectY, int x, int y);
 
   private:

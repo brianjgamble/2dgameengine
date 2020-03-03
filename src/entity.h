@@ -2,6 +2,7 @@
 #define GAME_ENTITY_H
 
 #include "component.h"
+#include "constants.h"
 #include "entity_manager.h"
 #include <map>
 #include <string>
@@ -13,12 +14,13 @@ class EntityManager;
 class Entity {
   public:
     explicit Entity(EntityManager& manager);
-    Entity(EntityManager& manager, std::string name);
+    Entity(EntityManager& manager, std::string name, LayerType layer);
 
     void update(float deltaTime);
     void render();
     void destroy();
     bool isActive() const;
+    LayerType getLayer() const;
 
     template<typename T, typename... TArgs> T& addComponent(TArgs&&... args) {
         T* newComponent(new T(std::forward<TArgs>(args)...));
@@ -39,6 +41,7 @@ class Entity {
     std::vector<Component*> components;
     std::string name;
     std::map<const std::type_info*, Component*> componentTypeMap;
+    LayerType layer;
 };
 
 #endif

@@ -5,8 +5,8 @@ Entity::Entity(EntityManager& manager) : manager {manager} {
     active = true;
 }
 
-Entity::Entity(EntityManager& manager, std::string name)
-    : manager {manager}, name {std::move(name)} {
+Entity::Entity(EntityManager& manager, std::string name, LayerType layer)
+    : manager {manager}, name {std::move(name)}, layer {layer} {
     active = true;
 }
 
@@ -28,4 +28,8 @@ void Entity::destroy() {
 
 bool Entity::isActive() const {
     return active;
+}
+
+LayerType Entity::getLayer() const {
+    return layer;
 }
