@@ -11,6 +11,7 @@ EntityManager manager;
 SDL_Renderer* Game::renderer;
 AssetManager* Game::assetManager = new AssetManager(&manager);
 SDL_Event Game::event;
+SDL_Rect Game::camera {0, 0, WINDOW_WIDTH, WINDOW_HEIGHT};
 Map* map;
 
 Game::Game() {
@@ -48,6 +49,8 @@ void Game::initialize(int width, int height) {
     running = true;
 }
 
+Entity& player(manager.addEntity("chopper", PLAYER_LAYER));
+
 void Game::loadLevel(int levelNumber) {
     assetManager->addTexture("tank-image",
                              "./assets/images/tank-big-right.png");
@@ -60,12 +63,10 @@ void Game::loadLevel(int levelNumber) {
     map = new Map("jungle-tiletexture", 2, 32);
     map->loadMap("./assets/tilemaps/jungle.map", 25, 20);
 
-    Entity& chopperEntity(manager.addEntity("chopper", PLAYER_LAYER));
-    chopperEntity.addComponent<TransformComponent>(240, 106, 0, 0, 32, 32, 1);
-    chopperEntity.addComponent<SpriteComponent>("chopper-image", 2, 90, true,
-                                                false);
-    chopperEntity.addComponent<KeyboardControlComponent>("up", "right", "down",
-                                                         "left", "space");
+    player.addComponent<TransformComponent>(240, 106, 0, 0, 32, 32, 1);
+    player.addComponent<SpriteComponent>("chopper-image", 2, 120, true, false);
+    player.addComponent<KeyboardControlComponent>("up", "right", "down", "left",
+                                                  "space");
 
     Entity& tankEntity(manager.addEntity("tank", ENEMIES_LAYER));
     tankEntity.addComponent<TransformComponent>(0, 0, 20, 20, 32, 32, 1);
@@ -114,6 +115,8 @@ void Game::update() {
     ticksLastFrame = SDL_GetTicks();
 
     manager.update(deltaTime);
+
+    handleCameraMovement();
 }
 
 void Game::render() {
@@ -133,4 +136,16 @@ void Game::destroy() {
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     SDL_Quit();
+}
+
+void Game::handleCameraMovement() {
+    auto* mainPlayerTransform = player.getComponent<TransformComponent>();
+
+    camera.x = mainPlayerTransform->getPosition().x - (WINDOW_WIDTH / 2);
+    camera.y = mainPlayerTransform->getPosition().y - (WINDOW_HEIGHT / 2);
+
+    camera.x = camera.x < 0 ? 0 : camera.x;
+    camera.y = camera.y < 0 ? 0 : camera.y;
+    camera.x = camera.x > camera.w ? camera.w : camera.x;
+    camera.y = camera.y > camera.h ? camera.h : camera.y;
 }

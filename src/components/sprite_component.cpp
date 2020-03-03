@@ -53,12 +53,15 @@ void SpriteComponent::initialize() {
 void SpriteComponent::update(float deltaTime) {
     if (isAnimated) {
         sourceRectangle.x =
-            sourceRectangle.w * static_cast<int>((SDL_GetTicks() / animationSpeed) % numFrames);
+            sourceRectangle.w *
+            static_cast<int>((SDL_GetTicks() / animationSpeed) % numFrames);
     }
     sourceRectangle.y = animationIndex * transform->getHeight();
 
-    destinationRectangle.x = static_cast<int>(transform->getPosition().x);
-    destinationRectangle.y = static_cast<int>(transform->getPosition().y);
+    destinationRectangle.x = static_cast<int>(transform->getPosition().x) -
+                             (isFixed ? 0 : Game::camera.x);
+    destinationRectangle.y = static_cast<int>(transform->getPosition().y) -
+                             (isFixed ? 0 : Game::camera.y);
     destinationRectangle.w = transform->getWidth() * transform->getScale();
     destinationRectangle.h = transform->getHeight() * transform->getScale();
 }

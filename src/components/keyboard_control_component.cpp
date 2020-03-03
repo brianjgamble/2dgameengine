@@ -37,23 +37,23 @@ void KeyboardControlComponent::update(float deltaTime) {
         std::string keyCode = std::to_string(Game::event.key.keysym.sym);
 
         if (keyCode == upKey) {
-            transform->velocity.y = -10;
+            transform->velocity.y = -50;
             transform->velocity.x = 0;
             sprite->play("UpAnimation");
         }
         if (keyCode == rightKey) {
             transform->velocity.y = 0;
-            transform->velocity.x = 10;
+            transform->velocity.x = 50;
             sprite->play("RightAnimation");
         }
         if (keyCode == downKey) {
-            transform->velocity.y = 10;
+            transform->velocity.y = 50;
             transform->velocity.x = 0;
             sprite->play("DownAnimation");
         }
         if (keyCode == leftKey) {
             transform->velocity.y = 0;
-            transform->velocity.x = -10;
+            transform->velocity.x = -50;
             sprite->play("LeftAnimation");
         }
         if (keyCode == shootKey) {
