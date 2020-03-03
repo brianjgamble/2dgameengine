@@ -29,7 +29,9 @@ list(APPEND SOURCES
         src/asset_manager.cpp src/asset_manager.h
         src/components/sprite_component.cpp src/components/sprite_component.h
         src/animation.cpp src/animation.h
-        src/components/keyboard_control_component.cpp src/components/keyboard_control_component.h)
+        src/components/keyboard_control_component.cpp src/components/keyboard_control_component.h
+        src/map.cpp src/map.h
+        src/components/tile_component.cpp src/components/tile_component.h)
 
 
 # Build the executable

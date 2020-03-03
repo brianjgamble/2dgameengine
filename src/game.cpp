@@ -3,14 +3,15 @@
 #include "asset_manager.h"
 #include "components/keyboard_control_component.h"
 #include "components/sprite_component.h"
-#include "components/transform_component.h"
 #include "constants.h"
+#include "map.h"
 #include <iostream>
 
 EntityManager manager;
 SDL_Renderer* Game::renderer;
 AssetManager* Game::assetManager = new AssetManager(&manager);
 SDL_Event Game::event;
+Map* map;
 
 Game::Game() {
     running = false;
@@ -53,6 +54,11 @@ void Game::loadLevel(int levelNumber) {
     assetManager->addTexture("chopper-image",
                              "./assets/images/chopper-spritesheet.png");
     assetManager->addTexture("radar-image", "./assets/images/radar.png");
+    assetManager->addTexture("jungle-tiletexture",
+                             "./assets/tilemaps/jungle.png");
+
+    map = new Map("jungle-tiletexture", 1, 32);
+    map->loadMap("./assets/tilemaps/jungle.map", 25, 20);
 
     Entity& chopperEntity(manager.addEntity("chopper"));
     chopperEntity.addComponent<TransformComponent>(240, 106, 0, 0, 32, 32, 1);
