@@ -23,6 +23,7 @@ class Game {
     void render();
     void destroy();
     void handleCameraMovement();
+    void checkCollisions();
 
   private:
     bool running;

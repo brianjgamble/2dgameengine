@@ -21,6 +21,7 @@ class Entity {
     void destroy();
     bool isActive() const;
     LayerType getLayer() const;
+    std::string getName() const;
 
     template<typename T, typename... TArgs> T& addComponent(TArgs&&... args) {
         T* newComponent(new T(std::forward<TArgs>(args)...));
@@ -29,6 +30,10 @@ class Entity {
         componentTypeMap[&typeid(*newComponent)] = newComponent;
         newComponent->initialize();
         return *newComponent;
+    }
+
+    template<typename T> bool hasComponent() const {
+        return componentTypeMap.count(&typeid(T));
     }
 
     template<typename T> T* getComponent() {

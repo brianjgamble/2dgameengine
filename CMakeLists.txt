@@ -31,7 +31,9 @@ list(APPEND SOURCES
         src/animation.cpp src/animation.h
         src/components/keyboard_control_component.cpp src/components/keyboard_control_component.h
         src/map.cpp src/map.h
-        src/components/tile_component.cpp src/components/tile_component.h)
+        src/components/tile_component.cpp src/components/tile_component.h
+        src/collision.cpp src/collision.h
+        src/components/collider_component.cpp src/components/collider_component.h)
 
 
 # Build the executable

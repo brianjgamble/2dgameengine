@@ -33,3 +33,6 @@ bool Entity::isActive() const {
 LayerType Entity::getLayer() const {
     return layer;
 }
+std::string Entity::getName() const {
+    return name;
+}
