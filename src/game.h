@@ -24,6 +24,8 @@ class Game {
     void destroy();
     void handleCameraMovement();
     void checkCollisions();
+    void processNextLevel(int levelNumber);
+    void processGameOver();
 
   private:
     bool running;

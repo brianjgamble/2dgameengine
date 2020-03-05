@@ -60,25 +60,37 @@ void Game::loadLevel(int levelNumber) {
     assetManager->addTexture("radar-image", "./assets/images/radar.png");
     assetManager->addTexture("jungle-tiletexture",
                              "./assets/tilemaps/jungle.png");
+    assetManager->addTexture("heliport-image", "./assets/images/heliport.png");
+    assetManager->addFont("charriot-font", "./assets/fonts/charriot.ttf", 14);
 
     map = new Map("jungle-tiletexture", 2, 32);
     map->loadMap("./assets/tilemaps/jungle.map", 25, 20);
 
     player.addComponent<TransformComponent>(240, 106, 0, 0, 32, 32, 1);
-    player.addComponent<SpriteComponent>("chopper-image", 2, 120, true, false);
+    player.addComponent<SpriteComponent>("chopper-image", 2, 90, true, false);
     player.addComponent<KeyboardControlComponent>("up", "right", "down", "left",
                                                   "space");
-    player.addComponent<ColliderComponent>("player", 240, 106, 32, 32);
+    player.addComponent<ColliderComponent>("PLAYER", 240, 106, 32, 32);
 
-    Entity& tankEntity(manager.addEntity("tank", ENEMIES_LAYER));
+    Entity& tankEntity(manager.addEntity("tank", ENEMY_LAYER));
     tankEntity.addComponent<TransformComponent>(150, 495, 5, 0, 32, 32, 1);
     tankEntity.addComponent<SpriteComponent>("tank-image");
-    tankEntity.addComponent<ColliderComponent>("enemy", 150, 495, 32, 32);
+    tankEntity.addComponent<ColliderComponent>("ENEMY", 150, 495, 32, 32);
+
+    Entity& heliport(manager.addEntity("Heliport", OBSTACLE_LAYER));
+    heliport.addComponent<TransformComponent>(470, 420, 0, 0, 32, 32, 1);
+    heliport.addComponent<SpriteComponent>("heliport-image");
+    heliport.addComponent<ColliderComponent>("LEVEL_COMPLETE", 470, 420, 32,
+                                             32);
 
     Entity& radarEntity(manager.addEntity("Radar", UI_LAYER));
     radarEntity.addComponent<TransformComponent>(720, 15, 0, 0, 64, 64, 1);
     radarEntity.addComponent<SpriteComponent>("radar-image", 8, 150, false,
                                               true);
+
+    //    Entity& labelLevelName(manager.addEntity("LabelLevelName", UI_LAYER));
+    //    labelLevelName.addComponent<TextLabelComponent>(10, 10, "First
+    //    Level...", "charriot-font", WHITE_COLOR);
 }
 
 void Game::processInput() {
@@ -155,8 +167,21 @@ void Game::handleCameraMovement() {
 }
 
 void Game::checkCollisions() {
-    std::string collisionTagType = manager.checkEntityCollisions(player);
-    if (collisionTagType == "enemy") {
-        running = false;
+    CollisionType collisionType = manager.checkCollisions();
+    if (collisionType == PLAYER_ENEMY_COLLISION) {
+        processGameOver();
     }
+    if (collisionType == PLAYER_LEVEL_COMPLETE_COLLISION) {
+        processNextLevel(1);
+    }
+}
+
+void Game::processNextLevel(int levelNumber) {
+    std::cout << "Next Level" << std::endl;
+    running = false;
+}
+
+void Game::processGameOver() {
+    std::cout << "Game Over" << std::endl;
+    running = false;
 }
