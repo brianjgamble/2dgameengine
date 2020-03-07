@@ -4,6 +4,7 @@
 #include "components/collider_component.h"
 #include "components/keyboard_control_component.h"
 #include "components/sprite_component.h"
+#include "components/text_label_component.h"
 #include "constants.h"
 #include "map.h"
 #include <iostream>
@@ -28,6 +29,11 @@ bool Game::isRunning() const {
 void Game::initialize(int width, int height) {
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
         std::cerr << "Error initializing SDL." << std::endl;
+        return;
+    }
+
+    if (TTF_Init() != 0) {
+        std::cerr << "Error initializing SDL TTF" << std::endl;
         return;
     }
 
@@ -88,9 +94,9 @@ void Game::loadLevel(int levelNumber) {
     radarEntity.addComponent<SpriteComponent>("radar-image", 8, 150, false,
                                               true);
 
-    //    Entity& labelLevelName(manager.addEntity("LabelLevelName", UI_LAYER));
-    //    labelLevelName.addComponent<TextLabelComponent>(10, 10, "First
-    //    Level...", "charriot-font", WHITE_COLOR);
+    Entity& labelLevelName(manager.addEntity("LabelLevelName", UI_LAYER));
+    labelLevelName.addComponent<TextLabelComponent>(
+        10, 10, "First Level...", "charriot-font", WHITE_COLOR);
 }
 
 void Game::processInput() {

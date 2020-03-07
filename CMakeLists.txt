@@ -34,7 +34,8 @@ list(APPEND SOURCES
         src/components/tile_component.cpp src/components/tile_component.h
         src/collision.cpp src/collision.h
         src/components/collider_component.cpp src/components/collider_component.h
-        src/font_manager.cpp src/font_manager.h)
+        src/font_manager.cpp src/font_manager.h
+        src/components/text_label_component.cpp src/components/text_label_component.h)
 
 
 # Build the executable

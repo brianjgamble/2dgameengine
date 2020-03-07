@@ -3,6 +3,7 @@
 
 void AssetManager::clearData() {
     textures.clear();
+    fonts.clear();
 }
 
 void AssetManager::addTexture(std::string textureId, std::string filePath) {
@@ -10,11 +11,15 @@ void AssetManager::addTexture(std::string textureId, std::string filePath) {
                      TextureManager::loadTexture(std::move(filePath)));
 }
 
-void AssetManager::addFont(std::string fontId, std::string filePath,
+void AssetManager::addFont(std::string fontId, const std::string& filePath,
                            int fontSize) {
-    fonts.emplace(fontId, FontManager::LoadFont(filePath.c_str(), fontSize));
+    fonts.emplace(fontId, FontManager::loadFont(filePath, fontSize));
 }
 
 SDL_Texture* AssetManager::getTexture(const std::string& textureId) {
     return textures[textureId];
+}
+
+TTF_Font* AssetManager::getFont(const std::string& fontId) {
+    return fonts[fontId];
 }
