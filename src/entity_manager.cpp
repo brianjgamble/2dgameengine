@@ -13,10 +13,14 @@ bool EntityManager::hasNoEntities() {
 }
 
 void EntityManager::update(float deltaTime) {
-    for (auto& entity : entities) {
-        entity->update(deltaTime);
+    for (int i = 0; i < entities.size(); i++) {
+        if (entities[i]->isActive()) {
+            entities[i]->update(deltaTime);
+        }
+        else {
+            entities.erase(entities.begin() + i);
+        }
     }
-    destroyInactiveEntities();
 }
 
 void EntityManager::render() {
@@ -90,12 +94,4 @@ CollisionType EntityManager::checkCollisions() const {
         }
     }
     return NO_COLLISION;
-}
-
-void EntityManager::destroyInactiveEntities() {
-    for (int i = 0; i < entities.size(); i++) {
-        if (!entities[i]->isActive()) {
-            entities.erase(entities.begin() + i);
-        }
-    }
 }
