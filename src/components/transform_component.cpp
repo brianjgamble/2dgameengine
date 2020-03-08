@@ -26,6 +26,11 @@ glm::vec2 TransformComponent::getPosition() const {
     return position;
 }
 
+void TransformComponent::setPosition(glm::vec2 newPosition) {
+    position.x = newPosition.x;
+    position.y = newPosition.y;
+}
+
 int TransformComponent::getScale() const {
     return scale;
 }

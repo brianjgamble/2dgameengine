@@ -3,6 +3,7 @@
 #include "asset_manager.h"
 #include "components/collider_component.h"
 #include "components/keyboard_control_component.h"
+#include "components/projectile_emitter_component.h"
 #include "components/sprite_component.h"
 #include "components/text_label_component.h"
 #include "constants.h"
@@ -67,6 +68,8 @@ void Game::loadLevel(int levelNumber) {
     assetManager->addTexture("jungle-tiletexture",
                              "./assets/tilemaps/jungle.png");
     assetManager->addTexture("heliport-image", "./assets/images/heliport.png");
+    assetManager->addTexture("projectile-image",
+                             "./assets/images/bullet-enemy.png");
     assetManager->addFont("charriot-font", "./assets/fonts/charriot.ttf", 14);
 
     map = new Map("jungle-tiletexture", 2, 32);
@@ -79,9 +82,17 @@ void Game::loadLevel(int levelNumber) {
     player.addComponent<ColliderComponent>("PLAYER", 240, 106, 32, 32);
 
     Entity& tankEntity(manager.addEntity("tank", ENEMY_LAYER));
-    tankEntity.addComponent<TransformComponent>(150, 495, 5, 0, 32, 32, 1);
+    tankEntity.addComponent<TransformComponent>(150, 495, 0, 0, 32, 32, 1);
     tankEntity.addComponent<SpriteComponent>("tank-image");
     tankEntity.addComponent<ColliderComponent>("ENEMY", 150, 495, 32, 32);
+
+    Entity& projectile(manager.addEntity("projectile", PROJECTILE_LAYER));
+    projectile.addComponent<TransformComponent>(150 + 16, 495 + 16, 0, 0, 4, 4,
+                                                1);
+    projectile.addComponent<SpriteComponent>("projectile-image");
+    projectile.addComponent<ColliderComponent>("PROJECTILE", 150 + 16, 495 + 16,
+                                               4, 4);
+    projectile.addComponent<ProjectileEmitterComponent>(50, 270, 200, true);
 
     Entity& heliport(manager.addEntity("Heliport", OBSTACLE_LAYER));
     heliport.addComponent<TransformComponent>(470, 420, 0, 0, 32, 32, 1);
@@ -175,6 +186,9 @@ void Game::handleCameraMovement() {
 void Game::checkCollisions() {
     CollisionType collisionType = manager.checkCollisions();
     if (collisionType == PLAYER_ENEMY_COLLISION) {
+        processGameOver();
+    }
+    if (collisionType == PLAYER_PROJECTILE_COLLISION) {
         processGameOver();
     }
     if (collisionType == PLAYER_LEVEL_COMPLETE_COLLISION) {

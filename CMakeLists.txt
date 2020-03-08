@@ -35,7 +35,8 @@ list(APPEND SOURCES
         src/collision.cpp src/collision.h
         src/components/collider_component.cpp src/components/collider_component.h
         src/font_manager.cpp src/font_manager.h
-        src/components/text_label_component.cpp src/components/text_label_component.h)
+        src/components/text_label_component.cpp src/components/text_label_component.h
+        src/components/projectile_emitter_component.cpp src/components/projectile_emitter_component.h)
 
 
 # Build the executable

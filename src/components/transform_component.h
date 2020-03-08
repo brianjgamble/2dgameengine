@@ -16,6 +16,7 @@ class TransformComponent : public Component {
     int getWidth() const;
     int getHeight() const;
     glm::vec2 getPosition() const;
+    void setPosition(glm::vec2 newPosition);
     int getScale() const;
 
     glm::vec2 velocity;
