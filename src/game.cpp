@@ -2,9 +2,6 @@
 #include "../lib/glm/glm.hpp"
 #include "asset_manager.h"
 #include "components/collider_component.h"
-#include "components/keyboard_control_component.h"
-#include "components/projectile_emitter_component.h"
-#include "components/sprite_component.h"
 #include "components/text_label_component.h"
 #include "constants.h"
 #include "map.h"
@@ -15,13 +12,12 @@ SDL_Renderer* Game::renderer;
 AssetManager* Game::assetManager = new AssetManager(&manager);
 SDL_Event Game::event;
 SDL_Rect Game::camera {0, 0, WINDOW_WIDTH, WINDOW_HEIGHT};
+Entity* mainPlayer = nullptr;
 Map* map;
 
 Game::Game() {
     running = false;
 }
-
-Game::~Game() {}
 
 bool Game::isRunning() const {
     return running;
@@ -52,7 +48,7 @@ void Game::initialize(int width, int height) {
         return;
     }
 
-    loadLevel(0);
+    loadLevel(1);
 
     running = true;
 }
@@ -60,54 +56,49 @@ void Game::initialize(int width, int height) {
 Entity& player(manager.addEntity("chopper", PLAYER_LAYER));
 
 void Game::loadLevel(int levelNumber) {
-    assetManager->addTexture("tank-image",
-                             "./assets/images/tank-big-right.png");
-    assetManager->addTexture("chopper-image",
-                             "./assets/images/chopper-spritesheet.png");
-    assetManager->addTexture("radar-image", "./assets/images/radar.png");
-    assetManager->addTexture("jungle-tiletexture",
-                             "./assets/tilemaps/jungle.png");
-    assetManager->addTexture("heliport-image", "./assets/images/heliport.png");
-    assetManager->addTexture("projectile-image",
-                             "./assets/images/bullet-enemy.png");
-    assetManager->addFont("charriot-font", "./assets/fonts/charriot.ttf", 14);
+    sol::state lua;
+    lua.open_libraries(sol::lib::base, sol::lib::os, sol::lib::math);
 
-    map = new Map("jungle-tiletexture", 2, 32);
-    map->loadMap("./assets/tilemaps/jungle.map", 25, 20);
+    std::string levelName = "Level" + std::to_string(levelNumber);
+    lua.script_file("./assets/scripts/" + levelName + ".lua");
 
-    player.addComponent<TransformComponent>(240, 106, 0, 0, 32, 32, 1);
-    player.addComponent<SpriteComponent>("chopper-image", 2, 90, true, false);
-    player.addComponent<KeyboardControlComponent>("up", "right", "down", "left",
-                                                  "space");
-    player.addComponent<ColliderComponent>("PLAYER", 240, 106, 32, 32);
+    /*******************************************/
+    /* Loads assets from lua                   */
+    /*******************************************/
+    sol::table levelData   = lua[levelName];
+    sol::table levelAssets = levelData["assets"];
 
-    Entity& tankEntity(manager.addEntity("tank", ENEMY_LAYER));
-    tankEntity.addComponent<TransformComponent>(150, 495, 0, 0, 32, 32, 1);
-    tankEntity.addComponent<SpriteComponent>("tank-image");
-    tankEntity.addComponent<ColliderComponent>("ENEMY", 150, 495, 32, 32);
+    unsigned int assetIndex = 0;
+    while (true) {
+        sol::optional<sol::table> existsAssetIndexMode =
+            levelAssets[assetIndex];
+        if (existsAssetIndexMode == sol::nullopt) {
+            break;
+        }
+        else {
+            sol::table asset      = levelAssets[assetIndex];
+            std::string assetType = asset["type"];
+            if (assetType == "texture") {
+                std::string assetId   = asset["id"];
+                std::string assetFile = asset["file"];
+                assetManager->addTexture(assetId, assetFile);
+            }
+        }
+        assetIndex++;
+    }
 
-    Entity& projectile(manager.addEntity("projectile", PROJECTILE_LAYER));
-    projectile.addComponent<TransformComponent>(150 + 16, 495 + 16, 0, 0, 4, 4,
-                                                1);
-    projectile.addComponent<SpriteComponent>("projectile-image");
-    projectile.addComponent<ColliderComponent>("PROJECTILE", 150 + 16, 495 + 16,
-                                               4, 4);
-    projectile.addComponent<ProjectileEmitterComponent>(50, 270, 200, true);
+    /*******************************************/
+    /* Loads assets from lua                   */
+    /*******************************************/
+    sol::table levelMap      = levelData["map"];
+    std::string mapTextureId = levelMap["textureAssetId"];
+    std::string mapFile      = levelMap["file"];
 
-    Entity& heliport(manager.addEntity("Heliport", OBSTACLE_LAYER));
-    heliport.addComponent<TransformComponent>(470, 420, 0, 0, 32, 32, 1);
-    heliport.addComponent<SpriteComponent>("heliport-image");
-    heliport.addComponent<ColliderComponent>("LEVEL_COMPLETE", 470, 420, 32,
-                                             32);
+    map = new Map(mapTextureId, static_cast<int>(levelMap["scale"]),
+                  static_cast<int>(levelMap["tileSize"]));
 
-    Entity& radarEntity(manager.addEntity("Radar", UI_LAYER));
-    radarEntity.addComponent<TransformComponent>(720, 15, 0, 0, 64, 64, 1);
-    radarEntity.addComponent<SpriteComponent>("radar-image", 8, 150, false,
-                                              true);
-
-    Entity& labelLevelName(manager.addEntity("LabelLevelName", UI_LAYER));
-    labelLevelName.addComponent<TextLabelComponent>(
-        10, 10, "First Level...", "charriot-font", WHITE_COLOR);
+    map->loadMap(mapFile, static_cast<int>(levelMap["mapSizeX"]),
+                 static_cast<int>(levelMap["mapSizeY"]));
 }
 
 void Game::processInput() {
@@ -172,15 +163,18 @@ void Game::destroy() {
 }
 
 void Game::handleCameraMovement() {
-    auto* mainPlayerTransform = player.getComponent<TransformComponent>();
+    if (mainPlayer) {
+        auto* mainPlayerTransform =
+            mainPlayer->getComponent<TransformComponent>();
 
-    camera.x = mainPlayerTransform->getPosition().x - (WINDOW_WIDTH / 2);
-    camera.y = mainPlayerTransform->getPosition().y - (WINDOW_HEIGHT / 2);
+        camera.x = mainPlayerTransform->getPosition().x - (WINDOW_WIDTH / 2);
+        camera.y = mainPlayerTransform->getPosition().y - (WINDOW_HEIGHT / 2);
 
-    camera.x = camera.x < 0 ? 0 : camera.x;
-    camera.y = camera.y < 0 ? 0 : camera.y;
-    camera.x = camera.x > camera.w ? camera.w : camera.x;
-    camera.y = camera.y > camera.h ? camera.h : camera.y;
+        camera.x = camera.x < 0 ? 0 : camera.x;
+        camera.y = camera.y < 0 ? 0 : camera.y;
+        camera.x = camera.x > camera.w ? camera.w : camera.x;
+        camera.y = camera.y > camera.h ? camera.h : camera.y;
+    }
 }
 
 void Game::checkCollisions() {
