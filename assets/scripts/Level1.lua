@@ -1,17 +1,28 @@
 ----------------------------------------------------
--- Start the seed to be used with math.random
+-- Get the current time of the day from the OS
 ----------------------------------------------------
 math.randomseed(os.time())
+local currentSystemHour = os.date("*t").hour
+local mapTextureAssetId = "terrain-texture-day"
+
+----------------------------------------------------
+-- Use a night-map or a day-map texture (9am-9pm)
+----------------------------------------------------
+if currentSystemHour > 9 and currentSystemHour < 21 then
+    mapTextureAssetId = "terrain-texture-day"
+else
+    mapTextureAssetId = "terrain-texture-night"
+end
 
 Level1 = {
     ----------------------------------------------------
     -- Table to define the list of assets
     ----------------------------------------------------
     assets = {
-        [0] = { type="texture", id = "terrain-texture-day", file = "./assets/tilemaps/jungle.png" },
-        [1] = { type="texture", id = "terrain-texture-night", file = "./assets/tilemaps/jungle-night.png" },
-        [2] = { type="texture", id = "chopper-texture", file = "./assets/images/chopper-spritesheet.png" },
-        [3] = { type="texture", id = "projectile-texture", file = "./assets/images/bullet-enemy.png" },
+        [0] = { type = "texture", id = "terrain-texture-day", file = "./assets/tilemaps/jungle.png" },
+        [1] = { type = "texture", id = "terrain-texture-night", file = "./assets/tilemaps/jungle-night.png" },
+        [2] = { type = "texture", id = "chopper-texture", file = "./assets/images/chopper-spritesheet.png" },
+        [3] = { type = "texture", id = "projectile-texture", file = "./assets/images/bullet-enemy.png" },
         [4] = { type="texture", id = "obstacles-texture", file = "./assets/images/obstacles.png" },
         [5] = { type="texture", id = "truck-left-texture", file = "./assets/images/truck-left.png" },
         [6] = { type="texture", id = "truck-right-texture", file = "./assets/images/truck-right.png" },
@@ -49,7 +60,7 @@ Level1 = {
     -- table to define the map config variables
     ----------------------------------------------------
     map = {
-        textureAssetId = "terrain-texture-day",
+        textureAssetId = mapTextureAssetId,
         file = "./assets/tilemaps/jungle.map",
         scale = 2,
         tileSize = 32,
