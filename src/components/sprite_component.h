@@ -10,6 +10,7 @@
 class SpriteComponent : public Component {
   public:
     explicit SpriteComponent(const std::string& assetTextureId);
+    SpriteComponent(const std::string& assetTextureId, bool isFixed);
     SpriteComponent(std::string id, int numFrames, int animationSpeed,
                     bool hasDirections, bool isFixed);
 

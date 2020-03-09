@@ -32,8 +32,9 @@ void EntityManager::render() {
     }
 }
 
-Entity& EntityManager::addEntity(std::string entityName, LayerType layer) {
-    auto* entity = new Entity(*this, std::move(entityName), layer);
+Entity& EntityManager::addEntity(const std::string& entityName,
+                                 LayerType layer) {
+    auto* entity = new Entity(*this, entityName, layer);
     entities.emplace_back(entity);
     return *entity;
 }
@@ -50,6 +51,15 @@ std::vector<Entity*> EntityManager::getEntitiesByLayer(LayerType layer) const {
         }
     }
     return selectedEntities;
+}
+
+Entity* EntityManager::getEntityByName(std::string entityName) const {
+    for (auto* entity : entities) {
+        if (entity->getName() == entityName) {
+            return entity;
+        }
+    }
+    return nullptr;
 }
 
 unsigned int EntityManager::getEntityCount() {
