@@ -24,7 +24,7 @@ include_directories(
 # Define the sources
 list(APPEND SOURCES
         src/game.cpp
-        src/component.cpp src/component.h
+        src/component.h
         src/entity.cpp src/entity.h
         src/entity_manager.cpp src/entity_manager.h
         src/components/transform_component.cpp src/components/transform_component.h
@@ -41,11 +41,13 @@ list(APPEND SOURCES
         src/components/text_label_component.cpp src/components/text_label_component.h
         src/components/projectile_emitter_component.cpp src/components/projectile_emitter_component.h)
 
+add_library(sources_lib ${SOURCES})
 
 # Build the executable
-add_executable(game src/main.cpp ${SOURCES})
+add_executable(game src/main.cpp)
 
 target_link_libraries(game
+        sources_lib
         ${LUA_LIBRARIES}
         ${SDL2_LIBRARIES}
         ${SDL2_IMAGE_LIBRARIES}
