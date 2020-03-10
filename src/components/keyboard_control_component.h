@@ -9,9 +9,11 @@
 class KeyboardControlComponent : public Component {
   public:
     KeyboardControlComponent() = default;
-    KeyboardControlComponent(std::string upKey, std::string rightKey,
-                             std::string downKey, std::string leftKey,
-                             std::string shootKey);
+    KeyboardControlComponent(const std::string& upKey,
+                             const std::string& rightKey,
+                             const std::string& downKey,
+                             const std::string& leftKey,
+                             const std::string& shootKey);
 
     std::string GetSDLKeyStringCode(const std::string& key);
 

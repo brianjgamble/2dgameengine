@@ -7,15 +7,12 @@
 
 class EntityManager {
   public:
-    void clearData();
     void update(float deltaTime);
     void render();
     bool hasNoEntities();
     Entity& addEntity(const std::string& entityName, LayerType layer);
-    std::vector<Entity*> getEntities() const;
     std::vector<Entity*> getEntitiesByLayer(LayerType layer) const;
-    Entity* getEntityByName(std::string entityName) const;
-    unsigned int getEntityCount();
+    Entity* getEntityByName(const std::string& entityName) const;
     CollisionType checkCollisions() const;
 
   private:

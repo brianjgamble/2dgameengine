@@ -7,8 +7,6 @@ TextLabelComponent::TextLabelComponent(int x, int y, const std::string& text,
                                        SDL_Color color) {
     this->position.x = x;
     this->position.y = y;
-    this->text       = text;
-    this->fontFamily = fontFamily;
     this->color      = color;
     setLabelText(text, fontFamily);
 }

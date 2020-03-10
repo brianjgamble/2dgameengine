@@ -14,8 +14,8 @@ class ColliderComponent : public Component {
     void update(float deltaTime) override;
     void render() override {}
 
-    std::string getColliderTag() const;
-    SDL_Rect getCollider() const;
+    [[nodiscard]] std::string getColliderTag() const;
+    [[nodiscard]] SDL_Rect getCollider() const;
 
   private:
     std::string colliderTag;

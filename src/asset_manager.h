@@ -13,7 +13,6 @@ class AssetManager {
     explicit AssetManager(EntityManager* manager) : manager {manager} {}
     ~AssetManager() = default;
 
-    void clearData();
     void addTexture(std::string textureId, std::string filePath);
     void addFont(std::string fontId, const std::string& filePath, int fontSize);
 

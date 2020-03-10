@@ -13,7 +13,7 @@ class Game {
     ~Game() = default;
 
     void initialize(int width, int height);
-    bool isRunning() const;
+    [[nodiscard]] bool isRunning() const;
     static SDL_Renderer* renderer;
     static AssetManager* assetManager;
     static SDL_Event event;

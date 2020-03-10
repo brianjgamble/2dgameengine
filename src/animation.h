@@ -3,13 +3,13 @@
 
 class Animation {
   public:
-    Animation();
+    Animation() = default;
     Animation(unsigned int index, unsigned int numFrames,
               unsigned int animationSpeed);
 
-    unsigned int getNumFrames() const;
-    unsigned int getIndex() const;
-    unsigned int getAnimationSpeed() const;
+    [[nodiscard]] unsigned int getNumFrames() const;
+    [[nodiscard]] unsigned int getIndex() const;
+    [[nodiscard]] unsigned int getAnimationSpeed() const;
 
   private:
     unsigned int index;

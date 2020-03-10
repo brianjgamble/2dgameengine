@@ -1,10 +1,9 @@
 #include "keyboard_control_component.h"
 
-KeyboardControlComponent::KeyboardControlComponent(std::string upKey,
-                                                   std::string rightKey,
-                                                   std::string downKey,
-                                                   std::string leftKey,
-                                                   std::string shootKey) {
+KeyboardControlComponent::KeyboardControlComponent(
+    const std::string& upKey, const std::string& rightKey,
+    const std::string& downKey, const std::string& leftKey,
+    const std::string& shootKey) {
     this->upKey    = GetSDLKeyStringCode(upKey);
     this->rightKey = GetSDLKeyStringCode(rightKey);
     this->downKey  = GetSDLKeyStringCode(downKey);

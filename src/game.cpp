@@ -175,7 +175,7 @@ void Game::loadLevel(int levelNumber) {
                 }
             }
 
-            // add input control componentss
+            // add input control components
             sol::optional<sol::table> existsInputComponent =
                 entity["components"]["input"];
             if (existsInputComponent != sol::nullopt) {

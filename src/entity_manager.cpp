@@ -1,13 +1,7 @@
 #include "entity_manager.h"
 #include "collision.h"
 #include "components/collider_component.h"
-#include <utility>
 
-void EntityManager::clearData() {
-    for (auto& entity : entities) {
-        entity->destroy();
-    }
-}
 bool EntityManager::hasNoEntities() {
     return entities.empty();
 }
@@ -39,10 +33,6 @@ Entity& EntityManager::addEntity(const std::string& entityName,
     return *entity;
 }
 
-std::vector<Entity*> EntityManager::getEntities() const {
-    return entities;
-}
-
 std::vector<Entity*> EntityManager::getEntitiesByLayer(LayerType layer) const {
     std::vector<Entity*> selectedEntities;
     for (auto& entity : entities) {
@@ -53,17 +43,13 @@ std::vector<Entity*> EntityManager::getEntitiesByLayer(LayerType layer) const {
     return selectedEntities;
 }
 
-Entity* EntityManager::getEntityByName(std::string entityName) const {
+Entity* EntityManager::getEntityByName(const std::string& entityName) const {
     for (auto* entity : entities) {
         if (entity->getName() == entityName) {
             return entity;
         }
     }
     return nullptr;
-}
-
-unsigned int EntityManager::getEntityCount() {
-    return entities.size();
 }
 
 CollisionType EntityManager::checkCollisions() const {

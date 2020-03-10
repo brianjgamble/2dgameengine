@@ -21,8 +21,6 @@ class TextLabelComponent : public Component {
 
   private:
     SDL_Rect position;
-    std::string text;
-    std::string fontFamily;
     SDL_Color color;
     SDL_Texture* texture;
 };
