@@ -10,14 +10,6 @@ void TransformComponent::update(float deltaTime) {
     position.y += velocity.y * deltaTime;
 }
 
-int TransformComponent::getWidth() const {
-    return width;
-}
-
-int TransformComponent::getHeight() const {
-    return height;
-}
-
 glm::vec2 TransformComponent::getPosition() const {
     return position;
 }
@@ -27,6 +19,22 @@ void TransformComponent::setPosition(glm::vec2 newPosition) {
     position.y = newPosition.y;
 }
 
-int TransformComponent::getScale() const {
-    return scale;
+void TransformComponent::updateDimensions(SDL_Rect& rect) {
+    rect.w = width;
+    rect.h = height;
+}
+
+void TransformComponent::updateScaledDimensions(SDL_Rect& rect) {
+    rect.w = width * scale;
+    rect.h = height * scale;
+}
+
+void TransformComponent::updatePosition(SDL_Rect& rect) {
+    rect.x = position.x;
+    rect.y = position.y;
+}
+
+void TransformComponent::updateHeightByFactor(SDL_Rect& rect,
+                                              unsigned int factor) {
+    rect.y = static_cast<int>(factor * height);
 }

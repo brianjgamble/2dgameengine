@@ -53,8 +53,7 @@ void SpriteComponent::initialize() {
     transform         = owner->getComponent<TransformComponent>();
     sourceRectangle.x = 0;
     sourceRectangle.y = 0;
-    sourceRectangle.w = transform->getWidth();
-    sourceRectangle.h = transform->getHeight();
+    transform->updateDimensions(sourceRectangle);
 }
 
 void SpriteComponent::update(float deltaTime) {
@@ -63,14 +62,13 @@ void SpriteComponent::update(float deltaTime) {
             sourceRectangle.w *
             static_cast<int>((SDL_GetTicks() / animationSpeed) % numFrames);
     }
-    sourceRectangle.y = animationIndex * transform->getHeight();
+    transform->updateHeightByFactor(sourceRectangle, animationIndex);
 
     destinationRectangle.x = static_cast<int>(transform->getPosition().x) -
                              (isFixed ? 0 : Game::camera.x);
     destinationRectangle.y = static_cast<int>(transform->getPosition().y) -
                              (isFixed ? 0 : Game::camera.y);
-    destinationRectangle.w = transform->getWidth() * transform->getScale();
-    destinationRectangle.h = transform->getHeight() * transform->getScale();
+    transform->updateScaledDimensions(destinationRectangle);
 }
 
 void SpriteComponent::render() {

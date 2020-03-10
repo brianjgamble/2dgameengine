@@ -13,11 +13,13 @@ class TransformComponent : public Component {
     void update(float deltaTime) override;
     void render() override {}
 
-    [[nodiscard]] int getWidth() const;
-    [[nodiscard]] int getHeight() const;
     [[nodiscard]] glm::vec2 getPosition() const;
     void setPosition(glm::vec2 newPosition);
-    [[nodiscard]] int getScale() const;
+
+    void updateDimensions(SDL_Rect& rect);
+    void updateScaledDimensions(SDL_Rect& rect);
+    void updatePosition(SDL_Rect& rect);
+    void updateHeightByFactor(SDL_Rect& rect, unsigned int factor);
 
     glm::vec2 velocity;
 
