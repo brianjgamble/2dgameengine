@@ -62,7 +62,7 @@ void SpriteComponent::update(float deltaTime) {
             sourceRectangle.w *
             static_cast<int>((SDL_GetTicks() / animationSpeed) % numFrames);
     }
-    transform->updateHeightByFactor(sourceRectangle, animationIndex);
+    transform->updatePositionByFactor(sourceRectangle, animationIndex);
 
     destinationRectangle.x = static_cast<int>(transform->getPosition().x) -
                              (isFixed ? 0 : Game::camera.x);

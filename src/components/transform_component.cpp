@@ -34,7 +34,6 @@ void TransformComponent::updatePosition(SDL_Rect& rect) {
     rect.y = position.y;
 }
 
-void TransformComponent::updateHeightByFactor(SDL_Rect& rect,
-                                              unsigned int factor) {
-    rect.y = static_cast<int>(factor * height);
+void TransformComponent::updatePositionByFactor(SDL_Rect& rect, int factor) {
+    rect.y = factor * height;
 }

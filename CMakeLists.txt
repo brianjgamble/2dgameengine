@@ -53,3 +53,6 @@ target_link_libraries(game
         ${SDL2_IMAGE_LIBRARIES}
         ${SDL2_TTF_LIBRARIES})
         #${SDL2_MIXER_LIBRARIES})
+
+enable_testing()
+add_subdirectory(tests)

@@ -19,7 +19,7 @@ class TransformComponent : public Component {
     void updateDimensions(SDL_Rect& rect);
     void updateScaledDimensions(SDL_Rect& rect);
     void updatePosition(SDL_Rect& rect);
-    void updateHeightByFactor(SDL_Rect& rect, unsigned int factor);
+    void updatePositionByFactor(SDL_Rect& rect, int factor);
 
     glm::vec2 velocity;
 
