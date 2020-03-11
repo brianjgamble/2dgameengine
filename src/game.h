@@ -1,7 +1,6 @@
 #ifndef GAME_GAME_H
 #define GAME_GAME_H
 
-#include "../lib/sol/sol.hpp"
 #include <SDL.h>
 #include <SDL_image.h>
 

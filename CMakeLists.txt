@@ -39,7 +39,8 @@ list(APPEND SOURCES
         src/components/collider_component.cpp src/components/collider_component.h
         src/font_manager.cpp src/font_manager.h
         src/components/text_label_component.cpp src/components/text_label_component.h
-        src/components/projectile_emitter_component.cpp src/components/projectile_emitter_component.h)
+        src/components/projectile_emitter_component.cpp src/components/projectile_emitter_component.h
+        src/levels.cpp src/levels.h)
 
 add_library(sources_lib ${SOURCES})
 
