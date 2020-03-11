@@ -21,6 +21,8 @@ class TransformComponent : public Component {
     void updatePosition(SDL_Rect& rect);
     void updatePositionByFactor(SDL_Rect& rect, int factor);
 
+    int distanceFrom(glm::vec2 origin);
+
     glm::vec2 velocity;
 
   private:

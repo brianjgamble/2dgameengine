@@ -37,3 +37,6 @@ void TransformComponent::updatePosition(SDL_Rect& rect) {
 void TransformComponent::updatePositionByFactor(SDL_Rect& rect, int factor) {
     rect.y = factor * height;
 }
+int TransformComponent::distanceFrom(glm::vec2 origin) {
+    return glm::distance(position, origin);
+}

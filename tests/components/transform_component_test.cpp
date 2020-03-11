@@ -28,8 +28,14 @@ TEST_CASE("Update position changes the x and y") {
 }
 
 TEST_CASE("Updates a rectangle position given a factor") {
-    SDL_Rect r{};
+    SDL_Rect r {};
     tc.updatePositionByFactor(r, 10);
 
     REQUIRE(r.y == 150);
+}
+
+TEST_CASE("Calculates the distance from an origin") {
+    glm::vec2 origin {5, 5};
+    int val = tc.distanceFrom(origin);
+    REQUIRE(val == 18);
 }

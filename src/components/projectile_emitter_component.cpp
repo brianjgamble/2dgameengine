@@ -17,7 +17,7 @@ void ProjectileEmitterComponent::initialize() {
 }
 
 void ProjectileEmitterComponent::update(float deltaTime) {
-    if (glm::distance(transform->getPosition(), origin) > range) {
+    if (transform->distanceFrom(origin) > range) {
         if (shouldLoop) {
             transform->setPosition(origin);
         }
