@@ -19,24 +19,25 @@ void TransformComponent::setPosition(glm::vec2 newPosition) {
     position.y = newPosition.y;
 }
 
-void TransformComponent::updateDimensions(SDL_Rect& rect) {
+void TransformComponent::applyDimensionsTo(SDL_Rect& rect) {
     rect.w = width;
     rect.h = height;
 }
 
-void TransformComponent::updateScaledDimensions(SDL_Rect& rect) {
+void TransformComponent::applyScaledDimensionsTo(SDL_Rect& rect) {
     rect.w = width * scale;
     rect.h = height * scale;
 }
 
-void TransformComponent::updatePosition(SDL_Rect& rect) {
+void TransformComponent::applyPositionTo(SDL_Rect& rect) {
     rect.x = position.x;
     rect.y = position.y;
 }
 
-void TransformComponent::updatePositionByFactor(SDL_Rect& rect, int factor) {
+void TransformComponent::applyVerticalFactorTo(SDL_Rect& rect, int factor) {
     rect.y = factor * height;
 }
+
 int TransformComponent::distanceFrom(glm::vec2 origin) {
     return glm::distance(position, origin);
 }

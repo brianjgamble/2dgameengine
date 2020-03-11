@@ -13,14 +13,14 @@ void ColliderComponent::initialize() {
         transform         = owner->getComponent<TransformComponent>();
         sourceRectangle.x = 0;
         sourceRectangle.y = 0;
-        transform->updateDimensions(sourceRectangle);
+        transform->applyDimensionsTo(sourceRectangle);
         destinationRectangle = {collider.x, collider.y, collider.w, collider.h};
     }
 }
 
 void ColliderComponent::update(float deltaTime) {
-    transform->updatePosition(collider);
-    transform->updateScaledDimensions(collider);
+    transform->applyPositionTo(collider);
+    transform->applyScaledDimensionsTo(collider);
 
     destinationRectangle.x = collider.x - Game::camera.x;
     destinationRectangle.y = collider.y - Game::camera.y;

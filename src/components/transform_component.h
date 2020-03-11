@@ -16,10 +16,10 @@ class TransformComponent : public Component {
     [[nodiscard]] glm::vec2 getPosition() const;
     void setPosition(glm::vec2 newPosition);
 
-    void updateDimensions(SDL_Rect& rect);
-    void updateScaledDimensions(SDL_Rect& rect);
-    void updatePosition(SDL_Rect& rect);
-    void updatePositionByFactor(SDL_Rect& rect, int factor);
+    void applyDimensionsTo(SDL_Rect& rect);
+    void applyScaledDimensionsTo(SDL_Rect& rect);
+    void applyPositionTo(SDL_Rect& rect);
+    void applyVerticalFactorTo(SDL_Rect& rect, int factor);
 
     int distanceFrom(glm::vec2 origin);
 
