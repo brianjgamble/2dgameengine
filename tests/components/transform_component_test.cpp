@@ -39,3 +39,13 @@ TEST_CASE("Calculates the distance from an origin") {
     int val = tc.distanceFrom(origin);
     REQUIRE(val == 18);
 }
+
+TEST_CASE("Velocity can be changed") {
+    float angleRadians = glm::radians(static_cast<float>(30));
+    int speed = 70;
+
+    TransformComponent expected {11, 22, 60, 35, 5, 15, 2};
+    tc.setVelocity(angleRadians, speed);
+
+    REQUIRE(tc == expected);
+}

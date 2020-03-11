@@ -5,6 +5,12 @@ TransformComponent::TransformComponent(int posX, int posY, int velX, int velY,
     : position {glm::vec2 {posX, posY}}, velocity {glm::vec2 {velX, velY}},
       width {w}, height {h}, scale {s} {}
 
+bool TransformComponent::operator==(const TransformComponent& rhs) const {
+    return glm::all(glm::equal(position, rhs.position)) &&
+           glm::all(glm::equal(velocity, rhs.velocity)) && width == rhs.width &&
+           height == rhs.height && scale == rhs.scale;
+}
+
 void TransformComponent::update(float deltaTime) {
     position.x += velocity.x * deltaTime;
     position.y += velocity.y * deltaTime;
@@ -40,4 +46,10 @@ void TransformComponent::applyVerticalFactorTo(SDL_Rect& rect, int factor) {
 
 int TransformComponent::distanceFrom(glm::vec2 origin) {
     return glm::distance(position, origin);
+}
+
+void TransformComponent::setVelocity(float angleRadians, int speed) {
+    int x    = static_cast<int>(glm::cos(angleRadians) * speed);
+    int y    = static_cast<int>(glm::sin(angleRadians) * speed);
+    velocity = glm::vec2(x, y);
 }

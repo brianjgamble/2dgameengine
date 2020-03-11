@@ -9,6 +9,7 @@ class TransformComponent : public Component {
     TransformComponent(int posX, int posY, int velX, int velY, int w, int h,
                        int s);
 
+    bool operator==(const TransformComponent& rhs) const;
     void initialize() override {}
     void update(float deltaTime) override;
     void render() override {}
@@ -23,6 +24,7 @@ class TransformComponent : public Component {
 
     int distanceFrom(glm::vec2 origin);
 
+    void setVelocity(float angleRadians, int speed);
     glm::vec2 velocity;
 
   private:

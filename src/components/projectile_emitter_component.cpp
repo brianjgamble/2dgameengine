@@ -12,8 +12,7 @@ ProjectileEmitterComponent::ProjectileEmitterComponent(int speed, int angleDeg,
 void ProjectileEmitterComponent::initialize() {
     transform = owner->getComponent<TransformComponent>();
     origin = glm::vec2(transform->getPosition().x, transform->getPosition().y);
-    transform->velocity =
-        glm::vec2(glm::cos(angleRad) * speed, glm::sin(angleRad) * speed);
+    transform->setVelocity(angleRad, speed);
 }
 
 void ProjectileEmitterComponent::update(float deltaTime) {
