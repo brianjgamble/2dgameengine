@@ -24,6 +24,8 @@ changes.  I would like to separate the core game engine logic from the SDL code.
 Other ideas include:
 
 - Introduce unit tests
-- Redesign the code using practices like "[Tell, Don't Ask](https://pragprog.com/articles/tell-dont-ask)"
+- Alter the design of the code
+    - [Tell, Don't Ask](https://pragprog.com/articles/tell-dont-ask)
+    - [Why getter and setter methods are evil](https://www.javaworld.com/article/2073723/why-getter-and-setter-methods-are-evil.html)
 - Add the helicopter sound
 - Add joystick controls
