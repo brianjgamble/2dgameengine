@@ -137,15 +137,18 @@ void Game::handleCameraMovement() {
 }
 
 void Game::checkCollisions() {
-    CollisionType collisionType = manager.checkCollisions();
-    if (collisionType == PLAYER_ENEMY_COLLISION) {
-        processGameOver();
-    }
-    if (collisionType == PLAYER_PROJECTILE_COLLISION) {
-        processGameOver();
-    }
-    if (collisionType == PLAYER_LEVEL_COMPLETE_COLLISION) {
-        processNextLevel(1);
+    switch (manager.checkCollisions()) {
+        case CollisionType::player_enemy:
+        case CollisionType::player_projectile:
+            processGameOver();
+            break;
+
+        case CollisionType::player_level_complete:
+            processNextLevel(1);
+            break;
+
+        default:
+            return;
     }
 }
 

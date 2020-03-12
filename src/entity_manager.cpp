@@ -68,26 +68,26 @@ CollisionType EntityManager::checkCollisions() const {
                             thatCollider->getCollider())) {
                         if (thisCollider->getColliderTag() == "PLAYER" &&
                             thatCollider->getColliderTag() == "ENEMY") {
-                            return PLAYER_ENEMY_COLLISION;
+                            return CollisionType::player_enemy;
                         }
                         if (thisCollider->getColliderTag() == "PLAYER" &&
                             thatCollider->getColliderTag() == "PROJECTILE") {
-                            return PLAYER_PROJECTILE_COLLISION;
+                            return CollisionType::player_projectile;
                         }
                         if (thisCollider->getColliderTag() == "ENEMY" &&
                             thatCollider->getColliderTag() ==
                                 "FRIENDLY_PROJECTILE") {
-                            return ENEMY_PROJECTILE_COLLISION;
+                            return CollisionType::enemy_projectile;
                         }
                         if (thisCollider->getColliderTag() == "PLAYER" &&
                             thatCollider->getColliderTag() ==
                                 "LEVEL_COMPLETE") {
-                            return PLAYER_LEVEL_COMPLETE_COLLISION;
+                            return CollisionType::player_level_complete;
                         }
                     }
                 }
             }
         }
     }
-    return NO_COLLISION;
+    return CollisionType::none;
 }

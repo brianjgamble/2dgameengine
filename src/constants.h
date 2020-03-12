@@ -9,13 +9,13 @@ const int WINDOW_HEIGHT = 600;
 const unsigned int FPS               = 60;
 const unsigned int FRAME_TARGET_TIME = 1000 / FPS;
 
-enum CollisionType {
-    NO_COLLISION,
-    PLAYER_ENEMY_COLLISION,
-    PLAYER_PROJECTILE_COLLISION,
-    ENEMY_PROJECTILE_COLLISION,
-    PLAYER_VEGETATION_COLLIDER,
-    PLAYER_LEVEL_COMPLETE_COLLISION
+enum class CollisionType {
+    none,
+    player_enemy,
+    player_projectile,
+    enemy_projectile,
+    player_vegetation,
+    player_level_complete
 };
 
 enum LayerType {
