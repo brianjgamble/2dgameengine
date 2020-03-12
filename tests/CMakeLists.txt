@@ -1,6 +1,7 @@
-add_executable(tests_game
-        test_main.cpp
-        components/transform_component_test.cpp)
+# Define the test sources
+file(GLOB_RECURSE TEST_SOURCES "*.cpp")
+
+add_executable(tests_game ${TEST_SOURCES})
 
 target_include_directories(tests_game PRIVATE ../lib/catch2)
 target_link_libraries(tests_game sources_lib)

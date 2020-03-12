@@ -22,31 +22,13 @@ include_directories(
         #${SDL2_MIXER_INCLUDE_DIRS})
 
 # Define the sources
-list(APPEND SOURCES
-        src/game.cpp
-        src/component.h
-        src/entity.cpp src/entity.h
-        src/entity_manager.cpp src/entity_manager.h
-        src/components/transform_component.cpp src/components/transform_component.h
-        src/texture_manager.cpp src/texture_manager.h
-        src/asset_manager.cpp src/asset_manager.h
-        src/components/sprite_component.cpp src/components/sprite_component.h
-        src/animation.cpp src/animation.h
-        src/components/keyboard_control_component.cpp src/components/keyboard_control_component.h
-        src/map.cpp src/map.h
-        src/components/tile_component.cpp src/components/tile_component.h
-        src/collision.cpp src/collision.h
-        src/components/collider_component.cpp src/components/collider_component.h
-        src/font_manager.cpp src/font_manager.h
-        src/components/text_label_component.cpp src/components/text_label_component.h
-        src/components/projectile_emitter_component.cpp src/components/projectile_emitter_component.h
-        src/levels.cpp src/levels.h)
+file(GLOB_RECURSE SOURCES "src/*.cpp")
 
+# Define source library
 add_library(sources_lib ${SOURCES})
 
 # Build the executable
 add_executable(game src/main.cpp)
-
 target_link_libraries(game
         sources_lib
         ${LUA_LIBRARIES}
