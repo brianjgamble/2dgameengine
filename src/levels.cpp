@@ -195,7 +195,7 @@ void Levels::loadLevel(int levelNumber) {
                 std::string textureAssetId =
                     entity["components"]["projectileEmitter"]["textureAssetId"];
                 Entity& projectile(
-                    entityMgr.addEntity("projectile", PROJECTILE_LAYER));
+                    entityMgr.addEntity("projectile", LayerType::projectile));
                 projectile.addComponent<TransformComponent>(
                     parentEntityXPos + (parentEntityWidth / 2),
                     parentEntityYPos + (parentEntityHeight / 2), 0, 0,

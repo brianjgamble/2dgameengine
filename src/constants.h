@@ -18,14 +18,14 @@ enum class CollisionType {
     player_level_complete
 };
 
-enum LayerType {
-    TILEMAP_LAYER    = 0,
-    VEGETATION_LAYER = 1,
-    ENEMY_LAYER      = 2,
-    OBSTACLE_LAYER   = 3,
-    PLAYER_LAYER     = 4,
-    PROJECTILE_LAYER = 5,
-    UI_LAYER         = 6
+enum class LayerType : unsigned int {
+    tilemap    = 0,
+    vegetation = 1,
+    enemy      = 2,
+    obstacle   = 3,
+    player     = 4,
+    projectile = 5,
+    ui         = 6
 };
 
 const unsigned int NUM_LAYERS = 7;
