@@ -49,3 +49,27 @@ TEST_CASE("Velocity can be changed") {
 
     REQUIRE(tc == expected);
 }
+
+TEST_CASE("Move up changes the velocity to a negative y-axis") {
+    TransformComponent expected {11, 22, 0, -50, 5, 15, 2};
+    tc.moveUp();
+    REQUIRE(tc == expected);
+}
+
+TEST_CASE("Move right changes the velocity to a positive x-axis") {
+    TransformComponent expected {11, 22, 50, 0, 5, 15, 2};
+    tc.moveRight();
+    REQUIRE(tc == expected);
+}
+
+TEST_CASE("Move down changes the velocity to a positive y-axis") {
+    TransformComponent expected {11, 22, 0, 50, 5, 15, 2};
+    tc.moveDown();
+    REQUIRE(tc == expected);
+}
+
+TEST_CASE("Move left changes the velocity to a negative x-axis") {
+    TransformComponent expected {11, 22, -50, 0, 5, 15, 2};
+    tc.moveLeft();
+    REQUIRE(tc == expected);
+}

@@ -64,3 +64,23 @@ void TransformComponent::center(SDL_Rect& rect) {
     rect.x = rect.x > rect.w ? rect.w : rect.x;
     rect.y = rect.y > rect.h ? rect.h : rect.y;
 }
+
+void TransformComponent::moveUp() {
+    velocity.x = 0;
+    velocity.y = -50;
+}
+
+void TransformComponent::moveRight() {
+    velocity.x = 50;
+    velocity.y = 0;
+}
+
+void TransformComponent::moveDown() {
+    velocity.x = 0;
+    velocity.y = 50;
+}
+
+void TransformComponent::moveLeft() {
+    velocity.x = -50;
+    velocity.y = 0;
+}

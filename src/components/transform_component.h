@@ -30,6 +30,11 @@ class TransformComponent : public Component {
 
     void center(SDL_Rect& rect);
 
+    void moveUp();
+    void moveRight();
+    void moveDown();
+    void moveLeft();
+
   private:
     glm::vec2 position;
     int width;

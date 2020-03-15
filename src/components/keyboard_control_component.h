@@ -8,7 +8,6 @@
 
 class KeyboardControlComponent : public Component {
   public:
-    KeyboardControlComponent() = default;
     KeyboardControlComponent(const std::string& upKey,
                              const std::string& rightKey,
                              const std::string& downKey,
