@@ -1,7 +1,5 @@
 #include "game.h"
-#include "../lib/glm/glm.hpp"
 #include "asset_manager.h"
-#include "components/collider_component.h"
 #include "components/text_label_component.h"
 #include "constants.h"
 #include "levels.h"
