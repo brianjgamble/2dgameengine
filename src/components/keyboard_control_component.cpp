@@ -61,16 +61,16 @@ void KeyboardControlComponent::update(float deltaTime) {
         std::string keyCode = std::to_string(Game::event.key.keysym.sym);
 
         if (keyCode == upKey) {
-            transform->velocity.y = 0;
+            transform->stop();
         }
         if (keyCode == rightKey) {
-            transform->velocity.x = 0;
+            transform->stop();
         }
         if (keyCode == downKey) {
-            transform->velocity.y = 0;
+            transform->stop();
         }
         if (keyCode == leftKey) {
-            transform->velocity.x = 0;
+            transform->stop();
         }
     }
 }

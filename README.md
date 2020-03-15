@@ -29,3 +29,5 @@ Other ideas include:
     - [Why getter and setter methods are evil](https://www.javaworld.com/article/2073723/why-getter-and-setter-methods-are-evil.html)
 - Add the helicopter sound
 - Add joystick controls
+    - ~~dpad~~
+    - analog stick

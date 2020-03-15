@@ -26,20 +26,21 @@ list(APPEND SOURCES
         src/game.cpp
         src/entity.cpp
         src/entity_manager.cpp
-        src/components/transform_component.cpp
         src/texture_manager.cpp
         src/asset_manager.cpp
-        src/components/sprite_component.cpp
         src/animation.cpp
-        src/components/keyboard_control_component.cpp
         src/map.cpp
-        src/components/tile_component.cpp
         src/collision.cpp
-        src/components/collider_component.cpp
         src/font_manager.cpp
+        src/levels.cpp
         src/components/text_label_component.cpp
         src/components/projectile_emitter_component.cpp
-        src/levels.cpp)
+        src/components/collider_component.cpp
+        src/components/tile_component.cpp
+        src/components/keyboard_control_component.cpp
+        src/components/sprite_component.cpp
+        src/components/transform_component.cpp
+        src/components/joystick_control_component.cpp)
 
 # Define source library
 add_library(sources_lib ${SOURCES})

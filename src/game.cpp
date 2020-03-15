@@ -114,6 +114,7 @@ void Game::render() {
 }
 
 void Game::destroy() {
+    manager.cleanup();
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     SDL_Quit();

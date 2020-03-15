@@ -34,6 +34,7 @@ class TransformComponent : public Component {
     void moveRight();
     void moveDown();
     void moveLeft();
+    void stop();
 
   private:
     glm::vec2 position;

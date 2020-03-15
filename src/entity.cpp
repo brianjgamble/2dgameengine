@@ -11,6 +11,11 @@ Entity::Entity(EntityManager& manager, std::string name, LayerType layer)
     active = true;
 }
 
+Entity::~Entity() {
+    components.clear();
+    componentTypeMap.clear();
+}
+
 void Entity::update(float deltaTime) {
     for (auto& component : components) {
         component->update(deltaTime);

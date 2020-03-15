@@ -1,6 +1,7 @@
 #include "levels.h"
 #include "../lib/sol/sol.hpp"
 #include "components/collider_component.h"
+#include "components/joystick_control_component.h"
 #include "components/keyboard_control_component.h"
 #include "components/projectile_emitter_component.h"
 #include "components/sprite_component.h"
@@ -134,6 +135,8 @@ void Levels::loadLevel(int levelNumber) {
             if (existsInputComponent != sol::nullopt) {
                 sol::optional<sol::table> existsKeyboardInputComponent =
                     entity["components"]["input"]["keyboard"];
+
+                // Add keyboard input
                 if (existsKeyboardInputComponent != sol::nullopt) {
                     std::string upKey =
                         entity["components"]["input"]["keyboard"]["up"];
@@ -148,6 +151,9 @@ void Levels::loadLevel(int levelNumber) {
                     newEntity.addComponent<KeyboardControlComponent>(
                         upKey, rightKey, downKey, leftKey, shootKey);
                 }
+
+                // Add joystick/dpad input
+                newEntity.addComponent<JoystickControlComponent>();
             }
 
             // Add collider component

@@ -73,3 +73,9 @@ TEST_CASE("Move left changes the velocity to a negative x-axis") {
     tc.moveLeft();
     REQUIRE(tc == expected);
 }
+
+TEST_CASE("Movement can be stopped") {
+    TransformComponent expected {11, 22, 0, 0, 5, 15, 2};
+    tc.stop();
+    REQUIRE(tc == expected);
+}

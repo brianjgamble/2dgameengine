@@ -15,6 +15,7 @@ class EntityManager {
     Entity* getEntityByName(const std::string& entityName) const;
     CollisionType checkCollisions() const;
     Entity* getPlayer() const;
+    void cleanup();
 
   private:
     std::vector<Entity*> entities;

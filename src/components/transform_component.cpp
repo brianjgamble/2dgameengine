@@ -84,3 +84,8 @@ void TransformComponent::moveLeft() {
     velocity.x = -50;
     velocity.y = 0;
 }
+
+void TransformComponent::stop() {
+    velocity.x = 0;
+    velocity.y = 0;
+}

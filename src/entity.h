@@ -15,6 +15,7 @@ class Entity {
   public:
     explicit Entity(EntityManager& manager);
     Entity(EntityManager& manager, std::string name, LayerType layer);
+    ~Entity();
 
     void update(float deltaTime);
     void render();
