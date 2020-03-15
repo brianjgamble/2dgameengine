@@ -57,7 +57,7 @@ void Game::initialize(int width, int height) {
 void Game::loadLevel(int levelNumber) {
     Levels levels {assetManager, manager, map};
     levels.loadLevel(levelNumber);
-    mainPlayer = manager.getEntityByName("player");
+    mainPlayer = manager.getPlayer();
 }
 
 void Game::processInput() {
@@ -123,16 +123,7 @@ void Game::destroy() {
 
 void Game::handleCameraMovement() {
     if (mainPlayer) {
-        auto* mainPlayerTransform =
-            mainPlayer->getComponent<TransformComponent>();
-
-        camera.x = mainPlayerTransform->getPosition().x - (WINDOW_WIDTH / 2);
-        camera.y = mainPlayerTransform->getPosition().y - (WINDOW_HEIGHT / 2);
-
-        camera.x = camera.x < 0 ? 0 : camera.x;
-        camera.y = camera.y < 0 ? 0 : camera.y;
-        camera.x = camera.x > camera.w ? camera.w : camera.x;
-        camera.y = camera.y > camera.h ? camera.h : camera.y;
+        mainPlayer->moveCamera(camera);
     }
 }
 

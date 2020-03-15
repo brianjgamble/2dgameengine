@@ -1,4 +1,5 @@
 #include "entity.h"
+#include "components/transform_component.h"
 #include <utility>
 
 Entity::Entity(EntityManager& manager) : manager {manager} {
@@ -35,4 +36,9 @@ LayerType Entity::getLayer() const {
 }
 std::string Entity::getName() const {
     return name;
+}
+
+void Entity::moveCamera(SDL_Rect& camera) {
+    auto* transform = getComponent<TransformComponent>();
+    transform->center(camera);
 }

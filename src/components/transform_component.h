@@ -2,7 +2,8 @@
 #define GAME_TRANSFORM_COMPONENT_H
 
 #include "../../lib/glm/glm.hpp"
-#include "../entity_manager.h"
+#include "../component.h"
+#include <SDL_rect.h>
 
 class TransformComponent : public Component {
   public:
@@ -26,6 +27,8 @@ class TransformComponent : public Component {
 
     void setVelocity(float angleRadians, int speed);
     glm::vec2 velocity;
+
+    void center(SDL_Rect& rect);
 
   private:
     glm::vec2 position;

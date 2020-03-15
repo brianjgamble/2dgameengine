@@ -1,4 +1,5 @@
 #include "transform_component.h"
+#include "../constants.h"
 
 TransformComponent::TransformComponent(int posX, int posY, int velX, int velY,
                                        int w, int h, int s)
@@ -52,4 +53,14 @@ void TransformComponent::setVelocity(float angleRadians, int speed) {
     int x    = static_cast<int>(glm::cos(angleRadians) * speed);
     int y    = static_cast<int>(glm::sin(angleRadians) * speed);
     velocity = glm::vec2(x, y);
+}
+
+void TransformComponent::center(SDL_Rect& rect) {
+    rect.x = static_cast<int>(position.x) - static_cast<int>(WINDOW_WIDTH / 2);
+    rect.y = static_cast<int>(position.y) - static_cast<int>(WINDOW_HEIGHT / 2);
+
+    rect.x = rect.x < 0 ? 0 : rect.x;
+    rect.y = rect.y < 0 ? 0 : rect.y;
+    rect.x = rect.x > rect.w ? rect.w : rect.x;
+    rect.y = rect.y > rect.h ? rect.h : rect.y;
 }

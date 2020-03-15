@@ -14,6 +14,7 @@ class EntityManager {
     std::vector<Entity*> getEntitiesByLayer(LayerType layer) const;
     Entity* getEntityByName(const std::string& entityName) const;
     CollisionType checkCollisions() const;
+    Entity* getPlayer() const;
 
   private:
     std::vector<Entity*> entities;

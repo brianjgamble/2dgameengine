@@ -91,3 +91,7 @@ CollisionType EntityManager::checkCollisions() const {
     }
     return CollisionType::none;
 }
+
+Entity* EntityManager::getPlayer() const {
+    return getEntityByName("player");
+}
