@@ -1,4 +1,5 @@
 #include "tile_component.h"
+#include "../texture_manager.h"
 
 TileComponent::TileComponent(int sourceRectX, int sourceRectY, int x, int y,
                              int tileSize, int tileScale,

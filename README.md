@@ -21,13 +21,13 @@ which teaches 2D game engine design using C++, SDL, and Lua.  In the repo, the t
 Continue working on the code to add additional features along with architectural 
 changes.  I would like to separate the core game engine logic from the SDL code.
 
-Other ideas include:
+TODO:
 
 - Introduce unit tests
 - Alter the design of the code
     - [Tell, Don't Ask](https://pragprog.com/articles/tell-dont-ask)
     - [Why getter and setter methods are evil](https://www.javaworld.com/article/2073723/why-getter-and-setter-methods-are-evil.html)
-- Add the helicopter sound
+- ~~Add the helicopter sound~~
 - Add joystick controls
     - ~~dpad~~
     - analog stick

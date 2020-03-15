@@ -33,6 +33,12 @@ void Game::initialize(int width, int height) {
         return;
     }
 
+    if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0) {
+        std::cerr << "SDL_mixer could not initialize! SDL_mixer Error: "
+                  << Mix_GetError() << std::endl;
+        return;
+    }
+
     window = SDL_CreateWindow(nullptr, SDL_WINDOWPOS_CENTERED,
                               SDL_WINDOWPOS_CENTERED, width, height,
                               SDL_WINDOW_BORDERLESS);
@@ -115,6 +121,9 @@ void Game::render() {
 
 void Game::destroy() {
     manager.cleanup();
+    assetManager->cleanup();
+    Mix_CloseAudio();
+    TTF_Quit();
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     SDL_Quit();

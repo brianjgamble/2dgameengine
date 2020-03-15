@@ -4,6 +4,7 @@
 #include "components/joystick_control_component.h"
 #include "components/keyboard_control_component.h"
 #include "components/projectile_emitter_component.h"
+#include "components/sound_control_component.h"
 #include "components/sprite_component.h"
 #include <string>
 
@@ -45,6 +46,12 @@ void Levels::loadLevel(int levelNumber) {
                 std::string assetFile = asset["file"];
                 int fontSize          = asset["fontSize"];
                 assetMgr->addFont(assetId, assetFile, fontSize);
+            }
+
+            if (assetType == "sound") {
+                std::string assetId   = asset["id"];
+                std::string assetFile = asset["file"];
+                assetMgr->addSound(assetId, assetFile);
             }
         }
         assetIndex++;
@@ -213,6 +220,16 @@ void Levels::loadLevel(int levelNumber) {
                 projectile.addComponent<ColliderComponent>(
                     "PROJECTILE", parentEntityXPos, parentEntityYPos,
                     projectileWidth, projectileHeight);
+            }
+
+            // add sound control components
+            sol::optional<sol::table> existsSoundComponent =
+                entity["components"]["sound"];
+            if (existsSoundComponent != sol::nullopt) {
+                std::string soundId =
+                    entity["components"]["sound"]["soundAssetId"];
+                int volume = entity["components"]["sound"]["volume"];
+                newEntity.addComponent<SoundControlComponent>(soundId, volume);
             }
         }
         entityIndex++;
