@@ -21,6 +21,15 @@ include_directories(
 
 # Define the sources
 list(APPEND SOURCES
+        src/components/text_label_component.cpp
+        src/components/projectile_emitter_component.cpp
+        src/components/collider_component.cpp
+        src/components/tile_component.cpp
+        src/components/keyboard_control_component.cpp
+        src/components/sprite_component.cpp
+        src/components/transform_component.cpp
+        src/components/joystick_control_component.cpp
+        src/components/sound_control_component.cpp
         src/game.cpp
         src/entity.cpp
         src/entity_manager.cpp
@@ -32,15 +41,7 @@ list(APPEND SOURCES
         src/font_manager.cpp
         src/levels.cpp
         src/sound.cpp
-        src/components/text_label_component.cpp
-        src/components/projectile_emitter_component.cpp
-        src/components/collider_component.cpp
-        src/components/tile_component.cpp
-        src/components/keyboard_control_component.cpp
-        src/components/sprite_component.cpp
-        src/components/transform_component.cpp
-        src/components/joystick_control_component.cpp
-        src/components/sound_control_component.cpp)
+        src/window.cpp)
 
 # Define source library
 add_library(sources_lib ${SOURCES})

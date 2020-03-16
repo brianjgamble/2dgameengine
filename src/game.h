@@ -1,6 +1,7 @@
 #ifndef GAME_GAME_H
 #define GAME_GAME_H
 
+#include "window.h"
 #include <SDL.h>
 #include <SDL_image.h>
 
@@ -9,9 +10,8 @@ class AssetManager;
 class Game {
   public:
     Game();
-    ~Game() = default;
+    ~Game();
 
-    void initialize(int width, int height);
     [[nodiscard]] bool isRunning() const;
     static SDL_Renderer* renderer;
     static AssetManager* assetManager;
@@ -21,15 +21,14 @@ class Game {
     void processInput();
     void update();
     void render();
-    void destroy();
     void handleCameraMovement();
     void checkCollisions();
     void processNextLevel(int levelNumber);
     void processGameOver();
 
   private:
-    bool running;
-    SDL_Window* window;
+    bool running {false};
+    Window* window;
     int ticksLastFrame;
 };
 

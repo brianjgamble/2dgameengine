@@ -1,6 +1,5 @@
 #include "game.h"
 #include "asset_manager.h"
-#include "components/text_label_component.h"
 #include "constants.h"
 #include "levels.h"
 #include "map.h"
@@ -15,47 +14,23 @@ Entity* mainPlayer = nullptr;
 Map* map;
 
 Game::Game() {
-    running = false;
+    window = new Window {WINDOW_WIDTH, WINDOW_HEIGHT};
+
+    if (window->isActive()) {
+        renderer = window->getRenderer();
+        loadLevel(1);
+        running = true;
+    }
+}
+
+Game::~Game() {
+    manager.cleanup();
+    assetManager->cleanup();
+    delete window;
 }
 
 bool Game::isRunning() const {
     return running;
-}
-
-void Game::initialize(int width, int height) {
-    if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
-        std::cerr << "Error initializing SDL." << std::endl;
-        return;
-    }
-
-    if (TTF_Init() != 0) {
-        std::cerr << "Error initializing SDL TTF" << std::endl;
-        return;
-    }
-
-    if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0) {
-        std::cerr << "SDL_mixer could not initialize! SDL_mixer Error: "
-                  << Mix_GetError() << std::endl;
-        return;
-    }
-
-    window = SDL_CreateWindow(nullptr, SDL_WINDOWPOS_CENTERED,
-                              SDL_WINDOWPOS_CENTERED, width, height,
-                              SDL_WINDOW_BORDERLESS);
-    if (!window) {
-        std::cerr << "Error creating SDL window." << std::endl;
-        return;
-    }
-
-    renderer = SDL_CreateRenderer(window, -1, 0);
-    if (!renderer) {
-        std::cerr << "Error creating SDL renderer." << std::endl;
-        return;
-    }
-
-    loadLevel(1);
-
-    running = true;
 }
 
 void Game::loadLevel(int levelNumber) {
@@ -117,16 +92,6 @@ void Game::render() {
     manager.render();
 
     SDL_RenderPresent(renderer);
-}
-
-void Game::destroy() {
-    manager.cleanup();
-    assetManager->cleanup();
-    Mix_CloseAudio();
-    TTF_Quit();
-    SDL_DestroyRenderer(renderer);
-    SDL_DestroyWindow(window);
-    SDL_Quit();
 }
 
 void Game::handleCameraMovement() {
