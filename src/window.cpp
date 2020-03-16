@@ -28,20 +28,17 @@ Window::Window(int width, int height) {
         return;
     }
 
-    renderer = SDL_CreateRenderer(window, -1, 0);
+    renderer = new Renderer(window);
 
-    if (!renderer) {
-        std::cerr << "Error creating SDL renderer." << std::endl;
-        return;
+    if (renderer->isCreated()) {
+        active = true;
     }
-
-    active = true;
 }
 
 Window::~Window() {
     Mix_CloseAudio();
     TTF_Quit();
-    SDL_DestroyRenderer(renderer);
+    delete renderer;
     SDL_DestroyWindow(window);
     SDL_Quit();
 }
@@ -51,5 +48,5 @@ bool Window::isActive() const {
 }
 
 SDL_Renderer* Window::getRenderer() const {
-    return renderer;
+    return renderer->toSDL();
 }

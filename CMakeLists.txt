@@ -41,7 +41,8 @@ list(APPEND SOURCES
         src/font_manager.cpp
         src/levels.cpp
         src/sound.cpp
-        src/window.cpp)
+        src/window.cpp
+        src/renderer.cpp)
 
 # Define source library
 add_library(sources_lib ${SOURCES})
