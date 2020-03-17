@@ -5,6 +5,9 @@ set(CMAKE_CXX_STANDARD 17)
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${PROJECT_SOURCE_DIR}/cmake")
 
+# add coverage compile options (for apple clang)
+set(CMAKE_CXX_FLAGS "-fprofile-instr-generate -fcoverage-mapping")
+
 # Include required libraries
 find_package(Lua REQUIRED)
 find_package(SDL2 REQUIRED)
