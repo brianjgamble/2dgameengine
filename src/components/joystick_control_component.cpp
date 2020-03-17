@@ -1,4 +1,5 @@
 #include "joystick_control_component.h"
+#include "../game.h"
 #include <iostream>
 
 JoystickControlComponent::JoystickControlComponent()

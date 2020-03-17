@@ -1,6 +1,6 @@
 #include "text_label_component.h"
-
-#include <utility>
+#include "../game.h"
+#include "../locator.h"
 
 TextLabelComponent::TextLabelComponent(int x, int y, const std::string& text,
                                        const std::string& fontFamily,
@@ -15,7 +15,7 @@ void TextLabelComponent::setLabelText(const std::string& text,
                                       const std::string& fontFamily) {
     SDL_Surface* surface = TTF_RenderText_Blended(
         Game::assetManager->getFont(fontFamily), text.c_str(), color);
-    texture = SDL_CreateTextureFromSurface(Game::renderer, surface);
+    texture = SDL_CreateTextureFromSurface(Locator::getRenderer(), surface);
     SDL_FreeSurface(surface);
     SDL_QueryTexture(texture, nullptr, nullptr, &position.w, &position.h);
 }

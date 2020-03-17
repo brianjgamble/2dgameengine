@@ -1,7 +1,6 @@
 #ifndef GAME_FONT_MANAGER_H
 #define GAME_FONT_MANAGER_H
 
-#include "game.h"
 #include <SDL_ttf.h>
 #include <string>
 

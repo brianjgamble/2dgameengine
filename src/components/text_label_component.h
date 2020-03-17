@@ -4,7 +4,6 @@
 #include "../asset_manager.h"
 #include "../entity_manager.h"
 #include "../font_manager.h"
-#include "../game.h"
 #include <SDL.h>
 #include <SDL_ttf.h>
 

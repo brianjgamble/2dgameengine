@@ -1,4 +1,5 @@
 #include "sprite_component.h"
+#include "../game.h"
 
 SpriteComponent::SpriteComponent(const std::string& assetTextureId) {
     isAnimated = false;

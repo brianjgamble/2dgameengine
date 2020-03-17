@@ -1,7 +1,7 @@
 #ifndef GAME_TEXTURE_MANAGER_H
 #define GAME_TEXTURE_MANAGER_H
 
-#include "game.h"
+#include <SDL_render.h>
 #include <string>
 
 class TextureManager {

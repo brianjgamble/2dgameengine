@@ -2,11 +2,11 @@
 #include "asset_manager.h"
 #include "constants.h"
 #include "levels.h"
+#include "locator.h"
 #include "map.h"
 #include <iostream>
 
 EntityManager manager;
-SDL_Renderer* Game::renderer;
 AssetManager* Game::assetManager = new AssetManager(&manager);
 SDL_Event Game::event;
 SDL_Rect Game::camera {0, 0, WINDOW_WIDTH, WINDOW_HEIGHT};
@@ -17,7 +17,7 @@ Game::Game() {
     window = new Window {WINDOW_WIDTH, WINDOW_HEIGHT};
 
     if (window->isActive()) {
-        renderer = window->getRenderer();
+        Locator::provide(window->getRenderer());
         loadLevel(1);
         running = true;
     }
@@ -82,8 +82,10 @@ void Game::update() {
 }
 
 void Game::render() {
-    SDL_SetRenderDrawColor(renderer, 21, 21, 21, 255);
-    SDL_RenderClear(renderer);
+    auto* r = Locator::getRenderer();
+
+    SDL_SetRenderDrawColor(r, 21, 21, 21, 255);
+    SDL_RenderClear(r);
 
     if (manager.hasNoEntities()) {
         return;
@@ -91,7 +93,7 @@ void Game::render() {
 
     manager.render();
 
-    SDL_RenderPresent(renderer);
+    SDL_RenderPresent(r);
 }
 
 void Game::handleCameraMovement() {

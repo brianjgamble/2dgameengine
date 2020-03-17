@@ -42,7 +42,8 @@ list(APPEND SOURCES
         src/levels.cpp
         src/sound.cpp
         src/window.cpp
-        src/renderer.cpp)
+        src/renderer.cpp
+        src/locator.cpp)
 
 # Define source library
 add_library(sources_lib ${SOURCES})
