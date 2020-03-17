@@ -5,11 +5,14 @@
 #include "components/keyboard_control_component.h"
 #include "components/projectile_emitter_component.h"
 #include "components/sound_control_component.h"
-#include "components/sprite_component.h"
 #include <string>
 
-Levels::Levels(AssetManager* assetMgr, EntityManager& entityMgr, Map* map)
-    : assetMgr {assetMgr}, entityMgr {entityMgr}, map {map} {}
+Levels::Levels(AssetManager* assetMgr, EntityManager& entityMgr)
+    : assetMgr {assetMgr}, entityMgr {entityMgr} {}
+
+Levels::~Levels() {
+    delete map;
+}
 
 void Levels::loadLevel(int levelNumber) {
     sol::state lua;

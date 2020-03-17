@@ -11,7 +11,6 @@ AssetManager* Game::assetManager = new AssetManager(&manager);
 SDL_Event Game::event;
 SDL_Rect Game::camera {0, 0, WINDOW_WIDTH, WINDOW_HEIGHT};
 Entity* mainPlayer = nullptr;
-Map* map;
 
 Game::Game() {
     window = new Window {WINDOW_WIDTH, WINDOW_HEIGHT};
@@ -34,7 +33,7 @@ bool Game::isRunning() const {
 }
 
 void Game::loadLevel(int levelNumber) {
-    Levels levels {assetManager, manager, map};
+    Levels levels {assetManager, manager};
     levels.loadLevel(levelNumber);
     mainPlayer = manager.getPlayer();
 }

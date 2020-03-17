@@ -6,7 +6,8 @@
 
 class Levels {
   public:
-    Levels(AssetManager* assetMgr, EntityManager& entityMgr, Map* map);
+    Levels(AssetManager* assetMgr, EntityManager& entityMgr);
+    ~Levels();
 
     void loadLevel(int levelNumber);
 
