@@ -2,11 +2,10 @@
 #include "font_manager.h"
 #include "sound.h"
 #include "texture_manager.h"
-#include <utility>
 
-void AssetManager::addTexture(std::string textureId, std::string filePath) {
-    textures.emplace(textureId,
-                     TextureManager::loadTexture(std::move(filePath)));
+void AssetManager::addTexture(std::string textureId,
+                              const std::string& filePath) {
+    textures.emplace(textureId, TextureManager::loadTexture(filePath));
 }
 
 void AssetManager::addFont(std::string fontId, const std::string& filePath,
