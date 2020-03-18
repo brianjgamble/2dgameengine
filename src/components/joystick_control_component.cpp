@@ -37,19 +37,19 @@ void JoystickControlComponent::update(float deltaTime) {
 
         if (value == SDL_HAT_UP) {
             transform->moveUp();
-            sprite->play("UpAnimation");
+            sprite->animate(Direction::up);
         }
         if (value == SDL_HAT_RIGHT) {
             transform->moveRight();
-            sprite->play("RightAnimation");
+            sprite->animate(Direction::right);
         }
         if (value == SDL_HAT_DOWN) {
             transform->moveDown();
-            sprite->play("DownAnimation");
+            sprite->animate(Direction::down);
         }
         if (value == SDL_HAT_LEFT) {
             transform->moveLeft();
-            sprite->play("LeftAnimation");
+            sprite->animate(Direction::left);
         }
         else if (value == SDL_HAT_CENTERED) {
             transform->stop();

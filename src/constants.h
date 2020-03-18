@@ -28,6 +28,8 @@ enum class LayerType : unsigned int {
     ui         = 6
 };
 
+enum class Direction { up, right, down, left, none };
+
 const unsigned int NUM_LAYERS = 7;
 
 const SDL_Color WHITE_COLOR = {255, 255, 255, 255};

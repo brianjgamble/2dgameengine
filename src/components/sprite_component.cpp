@@ -28,21 +28,21 @@ SpriteComponent::SpriteComponent(std::string id, int numFrames,
         Animation leftAnimation  = Animation(2, numFrames, animationSpeed);
         Animation upAnimation    = Animation(3, numFrames, animationSpeed);
 
-        animations.emplace("DownAnimation", downAnimation);
-        animations.emplace("RightAnimation", rightAnimation);
-        animations.emplace("LeftAnimation", leftAnimation);
-        animations.emplace("UpAnimation", upAnimation);
+        animations.emplace(Direction::down, downAnimation);
+        animations.emplace(Direction::right, rightAnimation);
+        animations.emplace(Direction::left, leftAnimation);
+        animations.emplace(Direction::up, upAnimation);
 
-        this->animationIndex       = 0;
-        this->currentAnimationName = "DownAnimation";
+        this->animationIndex   = 0;
+        this->currentAnimation = Direction::down;
     }
     else {
         Animation singleAnimation = Animation(0, numFrames, animationSpeed);
-        animations.emplace("SingleAnimation", singleAnimation);
-        this->animationIndex       = 0;
-        this->currentAnimationName = "SingleAnimation";
+        animations.emplace(Direction::none, singleAnimation);
+        this->animationIndex   = 0;
+        this->currentAnimation = Direction::none;
     }
-    play(this->currentAnimationName);
+    animate(this->currentAnimation);
     setTexture(id);
 }
 
@@ -77,9 +77,9 @@ void SpriteComponent::render() {
                          spriteFlip);
 }
 
-void SpriteComponent::play(const std::string& animationName) {
-    numFrames            = animations[animationName].getNumFrames();
-    animationIndex       = animations[animationName].getIndex();
-    animationSpeed       = animations[animationName].getAnimationSpeed();
-    currentAnimationName = animationName;
+void SpriteComponent::animate(Direction direction) {
+    numFrames        = animations[direction].getNumFrames();
+    animationIndex   = animations[direction].getIndex();
+    animationSpeed   = animations[direction].getAnimationSpeed();
+    currentAnimation = direction;
 }

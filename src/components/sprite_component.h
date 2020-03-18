@@ -19,7 +19,7 @@ class SpriteComponent : public Component {
     void update(float deltaTime) override;
     void render() override;
 
-    void play(const std::string& animationName);
+    void animate(Direction direction);
 
   private:
     SDL_Texture* texture;
@@ -31,8 +31,8 @@ class SpriteComponent : public Component {
     unsigned int numFrames;
     unsigned int animationSpeed;
     bool isFixed;
-    std::map<std::string, Animation> animations;
-    std::string currentAnimationName;
+    std::map<Direction, Animation> animations;
+    Direction currentAnimation;
     unsigned int animationIndex = 0;
 };
 
