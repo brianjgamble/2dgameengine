@@ -37,19 +37,19 @@ void KeyboardControlComponent::update(float deltaTime) {
 
         if (keyCode == upKey) {
             transform->moveUp();
-            sprite->animate(Direction::up);
+            sprite->animate(Movement::up);
         }
         if (keyCode == rightKey) {
             transform->moveRight();
-            sprite->animate(Direction::right);
+            sprite->animate(Movement::right);
         }
         if (keyCode == downKey) {
             transform->moveDown();
-            sprite->animate(Direction::down);
+            sprite->animate(Movement::down);
         }
         if (keyCode == leftKey) {
             transform->moveLeft();
-            sprite->animate(Direction::left);
+            sprite->animate(Movement::left);
         }
         if (keyCode == shootKey) {
             // TODO:

@@ -28,19 +28,19 @@ SpriteComponent::SpriteComponent(std::string id, int numFrames,
         Animation leftAnimation  = Animation(2, numFrames, animationSpeed);
         Animation upAnimation    = Animation(3, numFrames, animationSpeed);
 
-        animations.emplace(Direction::down, downAnimation);
-        animations.emplace(Direction::right, rightAnimation);
-        animations.emplace(Direction::left, leftAnimation);
-        animations.emplace(Direction::up, upAnimation);
+        animations.emplace(Movement::down, downAnimation);
+        animations.emplace(Movement::right, rightAnimation);
+        animations.emplace(Movement::left, leftAnimation);
+        animations.emplace(Movement::up, upAnimation);
 
         this->animationIndex   = 0;
-        this->currentAnimation = Direction::down;
+        this->currentAnimation = Movement::down;
     }
     else {
         Animation singleAnimation = Animation(0, numFrames, animationSpeed);
-        animations.emplace(Direction::none, singleAnimation);
+        animations.emplace(Movement::inert, singleAnimation);
         this->animationIndex   = 0;
-        this->currentAnimation = Direction::none;
+        this->currentAnimation = Movement::inert;
     }
     animate(this->currentAnimation);
     setTexture(id);
@@ -77,9 +77,9 @@ void SpriteComponent::render() {
                          spriteFlip);
 }
 
-void SpriteComponent::animate(Direction direction) {
-    numFrames        = animations[direction].getNumFrames();
-    animationIndex   = animations[direction].getIndex();
-    animationSpeed   = animations[direction].getAnimationSpeed();
-    currentAnimation = direction;
+void SpriteComponent::animate(Movement movement) {
+    numFrames        = animations[movement].getNumFrames();
+    animationIndex   = animations[movement].getIndex();
+    animationSpeed   = animations[movement].getAnimationSpeed();
+    currentAnimation = movement;
 }

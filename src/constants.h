@@ -28,7 +28,7 @@ enum class LayerType : unsigned int {
     ui         = 6
 };
 
-enum class Direction { up, right, down, left, none };
+enum class Movement { up, right, down, left, inert };
 
 const unsigned int NUM_LAYERS = 7;
 
