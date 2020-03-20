@@ -28,8 +28,12 @@ Game::~Game() {
     delete window;
 }
 
-bool Game::isRunning() const {
-    return running;
+void Game::begin() {
+    while (running) {
+        processInput();
+        update();
+        render();
+    }
 }
 
 void Game::loadLevel(int levelNumber) {

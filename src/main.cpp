@@ -2,12 +2,6 @@
 
 int main() {
     Game game = Game {};
-
-    while (game.isRunning()) {
-        game.processInput();
-        game.update();
-        game.render();
-    }
-
+    game.begin();
     return 0;
 }

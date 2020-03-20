@@ -12,7 +12,7 @@ class Game {
     Game();
     ~Game();
 
-    [[nodiscard]] bool isRunning() const;
+    void begin();
     static AssetManager* assetManager;
     static SDL_Event event;
     static SDL_Rect camera;
