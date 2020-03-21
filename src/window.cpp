@@ -36,9 +36,9 @@ Window::Window(int width, int height) {
 }
 
 Window::~Window() {
+    delete renderer;
     Mix_CloseAudio();
     TTF_Quit();
-    delete renderer;
     SDL_DestroyWindow(window);
     SDL_Quit();
 }
@@ -47,6 +47,6 @@ bool Window::isActive() const {
     return active;
 }
 
-SDL_Renderer* Window::getRenderer() const {
-    return renderer->toSDL();
+Renderer* Window::getRenderer() const {
+    return renderer;
 }

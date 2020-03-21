@@ -9,7 +9,7 @@ class Window {
     ~Window();
 
     [[nodiscard]] bool isActive() const;
-    [[nodiscard]] SDL_Renderer* getRenderer() const;
+    [[nodiscard]] Renderer* getRenderer() const;
 
   private:
     bool active {false};

@@ -1,11 +1,12 @@
 #ifndef GAME_LOCATOR_H
 #define GAME_LOCATOR_H
 
-#include <SDL_render.h>
+#include "renderer.h"
+
 class Locator {
   public:
-    static SDL_Renderer* getRenderer();
-    static void provide(SDL_Renderer* aRenderer);
+    static Renderer* getRenderer();
+    static void provide(Renderer* aRenderer);
 };
 
 #endif

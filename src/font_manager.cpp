@@ -6,5 +6,5 @@ TTF_Font* FontManager::loadFont(const std::string& fileName, int fontSize) {
 }
 
 void FontManager::draw(SDL_Texture* texture, SDL_Rect position) {
-    SDL_RenderCopy(Locator::getRenderer(), texture, nullptr, &position);
+    SDL_RenderCopy(Locator::getRenderer()->toSDL(), texture, nullptr, &position);
 }

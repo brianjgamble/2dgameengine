@@ -85,7 +85,7 @@ void Game::update() {
 }
 
 void Game::render() {
-    auto* r = Locator::getRenderer();
+    auto* r = Locator::getRenderer()->toSDL();
 
     SDL_SetRenderDrawColor(r, 21, 21, 21, 255);
     SDL_RenderClear(r);

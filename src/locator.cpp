@@ -1,11 +1,11 @@
 #include "locator.h"
 
-SDL_Renderer* renderer;
+Renderer* renderer;
 
-SDL_Renderer* Locator::getRenderer() {
+Renderer* Locator::getRenderer() {
     return renderer;
 }
 
-void Locator::provide(SDL_Renderer* aRenderer) {
+void Locator::provide(Renderer* aRenderer) {
     renderer = aRenderer;
 }
