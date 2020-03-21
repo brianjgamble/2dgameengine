@@ -1,7 +1,7 @@
 #ifndef GAME_ENTITY_H
 #define GAME_ENTITY_H
 
-#include "component.h"
+#include "components/component.h"
 #include "constants.h"
 #include "entity_manager.h"
 #include <map>

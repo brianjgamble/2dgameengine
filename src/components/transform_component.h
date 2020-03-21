@@ -2,7 +2,7 @@
 #define GAME_TRANSFORM_COMPONENT_H
 
 #include "../../lib/glm/glm.hpp"
-#include "../component.h"
+#include "component.h"
 #include <SDL_rect.h>
 
 class TransformComponent : public Component {

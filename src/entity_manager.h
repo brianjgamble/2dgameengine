@@ -1,7 +1,7 @@
 #ifndef GAME_ENTITY_MANAGER_H
 #define GAME_ENTITY_MANAGER_H
 
-#include "component.h"
+#include "components/component.h"
 #include "entity.h"
 #include <vector>
 

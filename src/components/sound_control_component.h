@@ -2,7 +2,7 @@
 #define GAME_SOUND_CONTROL_COMPONENT_H
 
 #include "../asset_manager.h"
-#include "../component.h"
+#include "component.h"
 #include <SDL_mixer.h>
 #include <string>
 

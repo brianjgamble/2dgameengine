@@ -1,7 +1,7 @@
 #ifndef GAME_JOYSTICK_CONTROL_COMPONENT_H
 #define GAME_JOYSTICK_CONTROL_COMPONENT_H
 
-#include "../component.h"
+#include "component.h"
 #include "sprite_component.h"
 #include "transform_component.h"
 #include <SDL_joystick.h>
