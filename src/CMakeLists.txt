@@ -20,9 +20,9 @@ list(APPEND SOURCES
         font_manager.cpp
         levels.cpp
         sound.cpp
-        window.cpp
         renderer.cpp
-        locator.cpp)
+        locator.cpp
+        video_manager.cpp)
 
 # Define source library
 add_library(sources_lib ${SOURCES})

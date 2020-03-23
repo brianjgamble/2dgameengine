@@ -1,9 +1,11 @@
-#include "window.h"
+#include "video_manager.h"
+#include "constants.h"
+#include "locator.h"
 #include <SDL_mixer.h>
 #include <SDL_ttf.h>
 #include <iostream>
 
-Window::Window(int width, int height) {
+void VideoManager::startUp() {
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
         std::cerr << "Error initializing SDL." << std::endl;
         return;
@@ -21,8 +23,8 @@ Window::Window(int width, int height) {
     }
 
     window = SDL_CreateWindow(nullptr, SDL_WINDOWPOS_CENTERED,
-                              SDL_WINDOWPOS_CENTERED, width, height,
-                              SDL_WINDOW_BORDERLESS);
+                              SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH,
+                              WINDOW_HEIGHT, SDL_WINDOW_BORDERLESS);
     if (!window) {
         std::cerr << "Error creating SDL window." << std::endl;
         return;
@@ -31,11 +33,12 @@ Window::Window(int width, int height) {
     renderer = new Renderer(window);
 
     if (renderer->isCreated()) {
-        active = true;
+        Locator::provide(renderer);
+        started = true;
     }
 }
 
-Window::~Window() {
+void VideoManager::shutDown() {
     delete renderer;
     Mix_CloseAudio();
     TTF_Quit();
@@ -43,10 +46,6 @@ Window::~Window() {
     SDL_Quit();
 }
 
-bool Window::isActive() const {
-    return active;
-}
-
-Renderer* Window::getRenderer() const {
-    return renderer;
+bool VideoManager::isStarted() const {
+    return started;
 }

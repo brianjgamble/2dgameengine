@@ -1,7 +1,6 @@
 #ifndef GAME_GAME_H
 #define GAME_GAME_H
 
-#include "window.h"
 #include <SDL.h>
 #include <SDL_image.h>
 
@@ -9,10 +8,10 @@ class AssetManager;
 
 class Game {
   public:
-    Game();
+    Game() : running {true}, ticksLastFrame {0} {}
     ~Game();
 
-    void begin();
+    void run();
     static AssetManager* assetManager;
     static SDL_Event event;
     static SDL_Rect camera;
@@ -26,8 +25,7 @@ class Game {
     void processGameOver();
 
   private:
-    bool running {false};
-    Window* window;
+    bool running;
     int ticksLastFrame;
 };
 

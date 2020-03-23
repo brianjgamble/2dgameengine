@@ -12,23 +12,14 @@ SDL_Event Game::event;
 SDL_Rect Game::camera {0, 0, WINDOW_WIDTH, WINDOW_HEIGHT};
 Entity* mainPlayer = nullptr;
 
-Game::Game() {
-    window = new Window {WINDOW_WIDTH, WINDOW_HEIGHT};
-
-    if (window->isActive()) {
-        Locator::provide(window->getRenderer());
-        loadLevel(1);
-        running = true;
-    }
-}
-
 Game::~Game() {
     manager.cleanup();
     assetManager->cleanup();
-    delete window;
 }
 
-void Game::begin() {
+void Game::run() {
+    loadLevel(1);
+
     while (running) {
         processInput();
         update();
