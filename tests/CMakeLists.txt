@@ -1,6 +1,7 @@
 # Define the test sources
 list(APPEND TEST_SOURCES
         test_main.cpp
+        rectangle_test.cpp
         components/transform_component_test.cpp)
 
 add_executable(tests_game ${TEST_SOURCES})
