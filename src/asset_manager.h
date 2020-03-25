@@ -3,6 +3,7 @@
 
 #include "entity_manager.h"
 #include "sound.h"
+#include "texture.h"
 #include <SDL_mixer.h>
 #include <SDL_ttf.h>
 #include <map>
@@ -17,7 +18,7 @@ class AssetManager {
     void addFont(std::string fontId, const std::string& filePath, int fontSize);
     void addSound(std::string soundId, const std::string& filePath);
 
-    SDL_Texture* getTexture(const std::string& textureId);
+    Texture* getTexture(const std::string& textureId);
     TTF_Font* getFont(const std::string& fontId);
     Sound* getSound(const std::string& soundId);
 
@@ -25,7 +26,7 @@ class AssetManager {
 
   private:
     EntityManager* manager;
-    std::map<std::string, SDL_Texture*> textures;
+    std::map<std::string, Texture*> textures;
     std::map<std::string, TTF_Font*> fonts;
     std::map<std::string, Sound*> sounds;
 };

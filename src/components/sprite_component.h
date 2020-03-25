@@ -3,7 +3,6 @@
 
 #include "../animation.h"
 #include "../asset_manager.h"
-#include "../texture_manager.h"
 #include "transform_component.h"
 #include <SDL.h>
 
@@ -22,7 +21,7 @@ class SpriteComponent : public Component {
     void animate(Movement movement);
 
   private:
-    SDL_Texture* texture;
+    Texture* texture;
     SDL_Rect sourceRectangle;
     SDL_Rect destinationRectangle;
     SDL_RendererFlip spriteFlip = SDL_FLIP_NONE;

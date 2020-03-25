@@ -12,7 +12,6 @@ list(APPEND SOURCES
         game.cpp
         entity.cpp
         entity_manager.cpp
-        texture_manager.cpp
         asset_manager.cpp
         animation.cpp
         map.cpp
@@ -22,7 +21,8 @@ list(APPEND SOURCES
         sound.cpp
         renderer.cpp
         locator.cpp
-        video_manager.cpp)
+        video_manager.cpp
+        texture.cpp)
 
 # Define source library
 add_library(sources_lib ${SOURCES})

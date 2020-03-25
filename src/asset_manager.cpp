@@ -1,11 +1,11 @@
 #include "asset_manager.h"
 #include "font_manager.h"
 #include "sound.h"
-#include "texture_manager.h"
+#include "texture.h"
 
 void AssetManager::addTexture(std::string textureId,
                               const std::string& filePath) {
-    textures.emplace(textureId, TextureManager::loadTexture(filePath));
+    textures.emplace(textureId, new Texture(filePath));
 }
 
 void AssetManager::addFont(std::string fontId, const std::string& filePath,
@@ -13,7 +13,7 @@ void AssetManager::addFont(std::string fontId, const std::string& filePath,
     fonts.emplace(fontId, FontManager::loadFont(filePath, fontSize));
 }
 
-SDL_Texture* AssetManager::getTexture(const std::string& textureId) {
+Texture* AssetManager::getTexture(const std::string& textureId) {
     return textures[textureId];
 }
 
