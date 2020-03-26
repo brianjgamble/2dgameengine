@@ -26,19 +26,9 @@ void TransformComponent::setPosition(glm::vec2 newPosition) {
     position.y = newPosition.y;
 }
 
-void TransformComponent::applyDimensionsTo(SDL_Rect& rect) {
-    rect.w = width;
-    rect.h = height;
-}
-
 void TransformComponent::applyDimensionsTo(Rectangle& rect) {
     auto d = Dimensions {width, height};
     rect.resize(d);
-}
-
-void TransformComponent::applyScaledDimensionsTo(SDL_Rect& rect) {
-    rect.w = width * scale;
-    rect.h = height * scale;
 }
 
 void TransformComponent::applyScaledDimensionsTo(Rectangle& rect) {
@@ -46,19 +36,10 @@ void TransformComponent::applyScaledDimensionsTo(Rectangle& rect) {
     rect.resize(d);
 }
 
-void TransformComponent::applyPositionTo(SDL_Rect& rect) {
-    rect.x = position.x;
-    rect.y = position.y;
-}
-
 void TransformComponent::applyPositionTo(Rectangle& rect) {
     auto coord =
         Coordinate {static_cast<int>(position.x), static_cast<int>(position.y)};
     rect.moveTo(coord);
-}
-
-void TransformComponent::applyVerticalFactorTo(SDL_Rect& rect, int factor) {
-    rect.y = factor * height;
 }
 
 void TransformComponent::applyVerticalFactorTo(Rectangle& rect, int factor) {
@@ -75,16 +56,6 @@ void TransformComponent::setVelocity(float angleRadians, int speed) {
     int x    = static_cast<int>(glm::cos(angleRadians) * speed);
     int y    = static_cast<int>(glm::sin(angleRadians) * speed);
     velocity = glm::vec2(x, y);
-}
-
-void TransformComponent::center(SDL_Rect& rect) {
-    rect.x = static_cast<int>(position.x) - static_cast<int>(WINDOW_WIDTH / 2);
-    rect.y = static_cast<int>(position.y) - static_cast<int>(WINDOW_HEIGHT / 2);
-
-    rect.x = rect.x < 0 ? 0 : rect.x;
-    rect.y = rect.y < 0 ? 0 : rect.y;
-    rect.x = rect.x > rect.w ? rect.w : rect.x;
-    rect.y = rect.y > rect.h ? rect.h : rect.y;
 }
 
 void TransformComponent::center(Rectangle& rect) {

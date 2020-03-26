@@ -19,13 +19,9 @@ class TransformComponent : public Component {
     [[nodiscard]] glm::vec2 getPosition() const;
     void setPosition(glm::vec2 newPosition);
 
-    void applyDimensionsTo(SDL_Rect& rect);
     void applyDimensionsTo(Rectangle& rect);
-    void applyScaledDimensionsTo(SDL_Rect& rect);
     void applyScaledDimensionsTo(Rectangle& rect);
-    void applyPositionTo(SDL_Rect& rect);
     void applyPositionTo(Rectangle& rect);
-    void applyVerticalFactorTo(SDL_Rect& rect, int factor);
     void applyVerticalFactorTo(Rectangle& rect, int factor);
 
     int distanceFrom(glm::vec2 origin);
@@ -33,7 +29,6 @@ class TransformComponent : public Component {
     void setVelocity(float angleRadians, int speed);
     glm::vec2 velocity;
 
-    void center(SDL_Rect& rect);
     void center(Rectangle& rect);
 
     void moveUp();
