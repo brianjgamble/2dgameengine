@@ -58,3 +58,19 @@ TEST_CASE("Default constructor sets all values to 0") {
 
     REQUIRE(a == b);
 }
+
+TEST_CASE("A rectangle can be moved") {
+    Rectangle a {10, 7, 10, 10};
+    Coordinate newCoord {5, 15};
+
+    a.moveTo(newCoord);
+    REQUIRE(a.getCoordinate() == newCoord);
+}
+
+TEST_CASE("A rectangle can be resized") {
+    Rectangle a {10, 7, 10, 10};
+    Dimensions newDim {20, 30};
+
+    a.resize(newDim);
+    REQUIRE(a.getDimensions() == newDim);
+}

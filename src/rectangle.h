@@ -4,6 +4,15 @@
 struct Coordinate {
     int x;
     int y;
+
+    bool operator==(const Coordinate& c) const;
+};
+
+struct Dimensions {
+    int w;
+    int h;
+
+    bool operator==(const Dimensions& d) const;
 };
 
 class Rectangle {
@@ -16,6 +25,11 @@ class Rectangle {
     bool operator==(const Rectangle& that) const;
     Coordinate operator-(const Rectangle& r);
     bool collides(const Rectangle& that);
+    void moveTo(const Coordinate& c);
+    void resize(const Dimensions& d);
+
+    [[nodiscard]] Coordinate getCoordinate() const;
+    [[nodiscard]] Dimensions getDimensions() const;
 
   private:
     int x, y;
