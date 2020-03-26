@@ -16,7 +16,7 @@ Coordinate Rectangle::operator-(const Rectangle& r) {
     return Coordinate {x - r.x, y - r.y};
 }
 
-bool Rectangle::collides(const Rectangle& that) {
+bool Rectangle::collidesWith(const Rectangle& that) const {
     return (x + w >= that.x && that.x + that.w >= x && y + h >= that.y &&
             that.y + that.h >= y);
 }

@@ -13,8 +13,17 @@ Texture::~Texture() {
     SDL_DestroyTexture(texture);
 }
 
-void Texture::draw(SDL_Rect sourceRectangle, SDL_Rect destinationRectangle,
+void Texture::draw(Rectangle srcRect, Rectangle destRect,
                    SDL_RendererFlip flip) {
-    SDL_RenderCopyEx(Locator::getRenderer()->toSDL(), texture, &sourceRectangle,
-                     &destinationRectangle, 0.0, nullptr, flip);
+    auto srcCoord = srcRect.getCoordinate();
+    auto srcDim   = srcRect.getDimensions();
+
+    auto destCoord = destRect.getCoordinate();
+    auto destDim   = destRect.getDimensions();
+
+    SDL_Rect source {srcCoord.x, srcCoord.y, srcDim.w, srcDim.h};
+    SDL_Rect destination {destCoord.x, destCoord.y, destDim.w, destDim.h};
+
+    SDL_RenderCopyEx(Locator::getRenderer()->toSDL(), texture, &source,
+                     &destination, 0.0, nullptr, flip);
 }

@@ -9,7 +9,7 @@
 EntityManager manager;
 AssetManager* Game::assetManager = new AssetManager(&manager);
 SDL_Event Game::event;
-SDL_Rect Game::camera {0, 0, WINDOW_WIDTH, WINDOW_HEIGHT};
+Rectangle Game::camera {0, 0, WINDOW_WIDTH, WINDOW_HEIGHT};
 Entity* mainPlayer = nullptr;
 
 Game::~Game() {

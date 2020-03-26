@@ -24,7 +24,7 @@ class Rectangle {
 
     bool operator==(const Rectangle& that) const;
     Coordinate operator-(const Rectangle& r);
-    bool collides(const Rectangle& that);
+    [[nodiscard]] bool collidesWith(const Rectangle& that) const;
     void moveTo(const Coordinate& c);
     void resize(const Dimensions& d);
 

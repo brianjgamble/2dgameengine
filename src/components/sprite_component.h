@@ -10,7 +10,7 @@ class SpriteComponent : public Component {
   public:
     explicit SpriteComponent(const std::string& assetTextureId);
     SpriteComponent(const std::string& assetTextureId, bool isFixed);
-    SpriteComponent(std::string id, int numFrames, int animationSpeed,
+    SpriteComponent(const std::string& id, int numFrames, int animationSpeed,
                     bool hasDirections, bool isFixed);
 
     void setTexture(const std::string& assetTextureId);
@@ -22,8 +22,8 @@ class SpriteComponent : public Component {
 
   private:
     Texture* texture;
-    SDL_Rect sourceRectangle;
-    SDL_Rect destinationRectangle;
+    Rectangle sourceRectangle;
+    Rectangle destinationRectangle;
     SDL_RendererFlip spriteFlip = SDL_FLIP_NONE;
     TransformComponent* transform;
     bool isAnimated;

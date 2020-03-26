@@ -15,13 +15,13 @@ class ColliderComponent : public Component {
     void render() override {}
 
     [[nodiscard]] std::string getColliderTag() const;
-    [[nodiscard]] SDL_Rect getCollider() const;
+    [[nodiscard]] const Rectangle& getCollider() const;
 
   private:
     std::string colliderTag;
-    SDL_Rect collider;
-    SDL_Rect sourceRectangle;
-    SDL_Rect destinationRectangle;
+    Rectangle collider;
+    Rectangle sourceRectangle;
+    Rectangle destinationRectangle;
     TransformComponent* transform;
 };
 

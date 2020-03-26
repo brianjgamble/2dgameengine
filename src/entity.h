@@ -7,6 +7,7 @@
 #include <map>
 #include <string>
 #include <vector>
+#include "rectangle.h"
 
 class Component;
 class EntityManager;
@@ -23,7 +24,7 @@ class Entity {
     bool isActive() const;
     LayerType getLayer() const;
     std::string getName() const;
-    void moveCamera(SDL_Rect& camera);
+    void moveCamera(Rectangle& camera);
 
     template<typename T, typename... TArgs> T& addComponent(TArgs&&... args) {
         T* newComponent(new T(std::forward<TArgs>(args)...));

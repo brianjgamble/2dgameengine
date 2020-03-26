@@ -1,6 +1,7 @@
 #ifndef GAME_GAME_H
 #define GAME_GAME_H
 
+#include "rectangle.h"
 #include <SDL.h>
 #include <SDL_image.h>
 
@@ -14,7 +15,7 @@ class Game {
     void run();
     static AssetManager* assetManager;
     static SDL_Event event;
-    static SDL_Rect camera;
+    static Rectangle camera;
     void loadLevel(int levelNumber);
     void processInput();
     void update();

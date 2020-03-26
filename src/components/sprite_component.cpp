@@ -14,7 +14,7 @@ SpriteComponent::SpriteComponent(const std::string& assetTextureId,
     setTexture(assetTextureId);
 }
 
-SpriteComponent::SpriteComponent(std::string id, int numFrames,
+SpriteComponent::SpriteComponent(const std::string& id, int numFrames,
                                  int animationSpeed, bool hasDirections,
                                  bool isFixed) {
     isAnimated           = true;
@@ -51,24 +51,30 @@ void SpriteComponent::setTexture(const std::string& assetTextureId) {
 }
 
 void SpriteComponent::initialize() {
-    transform         = owner->getComponent<TransformComponent>();
-    sourceRectangle.x = 0;
-    sourceRectangle.y = 0;
+    transform       = owner->getComponent<TransformComponent>();
+    sourceRectangle = {};
     transform->applyDimensionsTo(sourceRectangle);
 }
 
 void SpriteComponent::update(float deltaTime) {
     if (isAnimated) {
-        sourceRectangle.x =
-            sourceRectangle.w *
-            static_cast<int>((SDL_GetTicks() / animationSpeed) % numFrames);
+        auto coord = sourceRectangle.getCoordinate();
+        auto dim   = sourceRectangle.getDimensions();
+
+        coord.x = dim.w * static_cast<int>((SDL_GetTicks() / animationSpeed) %
+                                           numFrames);
+        sourceRectangle.moveTo(coord);
     }
     transform->applyVerticalFactorTo(sourceRectangle, animationIndex);
 
-    destinationRectangle.x = static_cast<int>(transform->getPosition().x) -
-                             (isFixed ? 0 : Game::camera.x);
-    destinationRectangle.y = static_cast<int>(transform->getPosition().y) -
-                             (isFixed ? 0 : Game::camera.y);
+    auto cameraCoord = Game::camera.getCoordinate();
+
+    int x = static_cast<int>(transform->getPosition().x) -
+            (isFixed ? 0 : cameraCoord.x);
+    int y = static_cast<int>(transform->getPosition().y) -
+            (isFixed ? 0 : cameraCoord.y);
+
+    destinationRectangle.moveTo(Coordinate {x, y});
     transform->applyScaledDimensionsTo(destinationRectangle);
 }
 

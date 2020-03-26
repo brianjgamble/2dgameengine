@@ -63,8 +63,8 @@ CollisionType EntityManager::checkCollisions() const {
                     thatEntity->hasComponent<ColliderComponent>()) {
                     auto* thatCollider =
                         thatEntity->getComponent<ColliderComponent>();
-                    if (Collision::checkRectangleCollision(
-                            thisCollider->getCollider(),
+
+                    if (thisCollider->getCollider().collidesWith(
                             thatCollider->getCollider())) {
                         if (thisCollider->getColliderTag() == "PLAYER" &&
                             thatCollider->getColliderTag() == "ENEMY") {

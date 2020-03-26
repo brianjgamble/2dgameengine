@@ -10,11 +10,10 @@ ColliderComponent::ColliderComponent(std::string colliderTag, int x, int y,
 
 void ColliderComponent::initialize() {
     if (owner->hasComponent<TransformComponent>()) {
-        transform         = owner->getComponent<TransformComponent>();
-        sourceRectangle.x = 0;
-        sourceRectangle.y = 0;
+        transform       = owner->getComponent<TransformComponent>();
+        sourceRectangle = {};
         transform->applyDimensionsTo(sourceRectangle);
-        destinationRectangle = {collider.x, collider.y, collider.w, collider.h};
+        destinationRectangle = {collider};
     }
 }
 
@@ -22,12 +21,14 @@ void ColliderComponent::update(float deltaTime) {
     transform->applyPositionTo(collider);
     transform->applyScaledDimensionsTo(collider);
 
-    destinationRectangle.x = collider.x - Game::camera.x;
-    destinationRectangle.y = collider.y - Game::camera.y;
+    auto coord = collider - Game::camera;
+    destinationRectangle.moveTo(coord);
 }
+
 std::string ColliderComponent::getColliderTag() const {
     return colliderTag;
 }
-SDL_Rect ColliderComponent::getCollider() const {
+
+const Rectangle& ColliderComponent::getCollider() const {
     return collider;
 }

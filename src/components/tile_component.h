@@ -17,8 +17,8 @@ class TileComponent : public Component {
 
   private:
     Texture* texture;
-    SDL_Rect sourceRectangle;
-    SDL_Rect destinationRectangle;
+    Rectangle sourceRectangle;
+    Rectangle destinationRectangle;
     glm::vec2 position;
 };
 

@@ -43,7 +43,7 @@ std::string Entity::getName() const {
     return name;
 }
 
-void Entity::moveCamera(SDL_Rect& camera) {
+void Entity::moveCamera(Rectangle& camera) {
     auto* transform = getComponent<TransformComponent>();
     transform->center(camera);
 }
