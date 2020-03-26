@@ -19,7 +19,7 @@ class TextLabelComponent : public Component {
     void setLabelText(const std::string& text, const std::string& fontFamily);
 
   private:
-    SDL_Rect position;
+    Rectangle position;
     SDL_Color color;
     SDL_Texture* texture;
 };
