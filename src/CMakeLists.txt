@@ -15,7 +15,6 @@ list(APPEND SOURCES
         asset_manager.cpp
         animation.cpp
         map.cpp
-        collision.cpp
         font_manager.cpp
         levels.cpp
         sound.cpp

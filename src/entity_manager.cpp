@@ -1,5 +1,4 @@
 #include "entity_manager.h"
-#include "collision.h"
 #include "components/collider_component.h"
 
 bool EntityManager::hasNoEntities() {
