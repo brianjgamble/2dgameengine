@@ -2,6 +2,7 @@
 #define GAME_TRANSFORM_COMPONENT_H
 
 #include "../../lib/glm/glm.hpp"
+#include "../rectangle.h"
 #include "component.h"
 #include <SDL_rect.h>
 
@@ -19,9 +20,13 @@ class TransformComponent : public Component {
     void setPosition(glm::vec2 newPosition);
 
     void applyDimensionsTo(SDL_Rect& rect);
+    void applyDimensionsTo(Rectangle& rect);
     void applyScaledDimensionsTo(SDL_Rect& rect);
+    void applyScaledDimensionsTo(Rectangle& rect);
     void applyPositionTo(SDL_Rect& rect);
+    void applyPositionTo(Rectangle& rect);
     void applyVerticalFactorTo(SDL_Rect& rect, int factor);
+    void applyVerticalFactorTo(Rectangle& rect, int factor);
 
     int distanceFrom(glm::vec2 origin);
 

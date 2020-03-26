@@ -31,9 +31,19 @@ void TransformComponent::applyDimensionsTo(SDL_Rect& rect) {
     rect.h = height;
 }
 
+void TransformComponent::applyDimensionsTo(Rectangle& rect) {
+    auto d = Dimensions {width, height};
+    rect.resize(d);
+}
+
 void TransformComponent::applyScaledDimensionsTo(SDL_Rect& rect) {
     rect.w = width * scale;
     rect.h = height * scale;
+}
+
+void TransformComponent::applyScaledDimensionsTo(Rectangle& rect) {
+    auto d = Dimensions {width * scale, height * scale};
+    rect.resize(d);
 }
 
 void TransformComponent::applyPositionTo(SDL_Rect& rect) {
@@ -41,8 +51,20 @@ void TransformComponent::applyPositionTo(SDL_Rect& rect) {
     rect.y = position.y;
 }
 
+void TransformComponent::applyPositionTo(Rectangle& rect) {
+    auto coord =
+        Coordinate {static_cast<int>(position.x), static_cast<int>(position.y)};
+    rect.moveTo(coord);
+}
+
 void TransformComponent::applyVerticalFactorTo(SDL_Rect& rect, int factor) {
     rect.y = factor * height;
+}
+
+void TransformComponent::applyVerticalFactorTo(Rectangle& rect, int factor) {
+    auto coord = rect.getCoordinate();
+    coord.y    = factor * height;
+    rect.moveTo(coord);
 }
 
 int TransformComponent::distanceFrom(glm::vec2 origin) {

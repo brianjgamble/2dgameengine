@@ -4,34 +4,42 @@
 TransformComponent tc {11, 22, 10, 20, 5, 15, 2};
 
 TEST_CASE("Apply the current dimensions to the given rectangle") {
-    SDL_Rect r {};
-    tc.applyDimensionsTo(r);
+    Rectangle r {};
 
-    REQUIRE(r.w == 5);
-    REQUIRE(r.h == 15);
+    tc.applyDimensionsTo(r);
+    auto dim = r.getDimensions();
+
+    REQUIRE(dim.w == 5);
+    REQUIRE(dim.h == 15);
 }
 
 TEST_CASE("Apply scaled dimensions to the given rectangle") {
-    SDL_Rect r {};
-    tc.applyScaledDimensionsTo(r);
+    Rectangle r {};
 
-    REQUIRE(r.w == 10);
-    REQUIRE(r.h == 30);
+    tc.applyScaledDimensionsTo(r);
+    auto dim = r.getDimensions();
+
+    REQUIRE(dim.w == 10);
+    REQUIRE(dim.h == 30);
 }
 
 TEST_CASE("Apply the current position to the given rectangle") {
-    SDL_Rect r {};
-    tc.applyPositionTo(r);
+    Rectangle r {};
 
-    REQUIRE(r.x == 11);
-    REQUIRE(r.y == 22);
+    tc.applyPositionTo(r);
+    auto coord = r.getCoordinate();
+
+    REQUIRE(coord.x == 11);
+    REQUIRE(coord.y == 22);
 }
 
 TEST_CASE("Apply a factored vertical position to the given rectangle") {
-    SDL_Rect r {};
-    tc.applyVerticalFactorTo(r, 10);
+    Rectangle r {};
 
-    REQUIRE(r.y == 150);
+    tc.applyVerticalFactorTo(r, 10);
+    auto coord = r.getCoordinate();
+
+    REQUIRE(coord.y == 150);
 }
 
 TEST_CASE("Calculates the distance from an origin") {
