@@ -51,3 +51,10 @@ TEST_CASE("Subtract two rectangles returns a coordinate") {
     REQUIRE(coord.x == 7);
     REQUIRE(coord.y == 3);
 }
+
+TEST_CASE("Default constructor sets all values to 0") {
+    Rectangle a {};
+    Rectangle b {0, 0, 0, 0};
+
+    REQUIRE(a == b);
+}

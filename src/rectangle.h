@@ -8,6 +8,7 @@ struct Coordinate {
 
 class Rectangle {
   public:
+    Rectangle() = default;
     Rectangle(int x, int y, int width, int height)
         : x {x}, y {y}, w {width}, h {height} {}
     Rectangle(const Rectangle& r) = default;
