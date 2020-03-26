@@ -87,6 +87,21 @@ void TransformComponent::center(SDL_Rect& rect) {
     rect.y = rect.y > rect.h ? rect.h : rect.y;
 }
 
+void TransformComponent::center(Rectangle& rect) {
+    int x = static_cast<int>(position.x) - static_cast<int>(WINDOW_WIDTH / 2);
+    int y = static_cast<int>(position.y) - static_cast<int>(WINDOW_HEIGHT / 2);
+
+    auto dim = rect.getDimensions();
+
+    x = x < 0 ? 0 : x;
+    y = y < 0 ? 0 : y;
+    x = x > dim.w ? dim.w : x;
+    y = y > dim.h ? dim.h : y;
+
+    auto newCoord = Coordinate {x, y};
+    rect.moveTo(newCoord);
+}
+
 void TransformComponent::moveUp() {
     velocity.x = 0;
     velocity.y = -50;

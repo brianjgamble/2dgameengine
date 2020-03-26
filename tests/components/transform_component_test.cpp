@@ -87,3 +87,14 @@ TEST_CASE("Movement can be stopped") {
     tc.stop();
     REQUIRE(tc == expected);
 }
+
+TEST_CASE("Center a rectangle") {
+    TransformComponent tc2 {500, 600, 200, 200, 5, 15, 2};
+    Rectangle r {20, 30, 50, 50};
+
+    tc2.center(r);
+    auto coord = r.getCoordinate();
+
+    REQUIRE(coord.x == 50);
+    REQUIRE(coord.y == 50);
+}

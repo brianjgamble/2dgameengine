@@ -34,6 +34,7 @@ class TransformComponent : public Component {
     glm::vec2 velocity;
 
     void center(SDL_Rect& rect);
+    void center(Rectangle& rect);
 
     void moveUp();
     void moveRight();
