@@ -9,7 +9,7 @@ class EntityManager {
   public:
     void update(float deltaTime);
     void render();
-    bool hasNoEntities();
+    bool hasEntities();
     Entity& addEntity(const std::string& entityName, LayerType layer);
     std::vector<Entity*> getEntitiesByLayer(LayerType layer) const;
     Entity* getEntityByName(const std::string& entityName) const;

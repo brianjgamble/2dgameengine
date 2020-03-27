@@ -81,13 +81,10 @@ void Game::render() {
     SDL_SetRenderDrawColor(r, 21, 21, 21, 255);
     SDL_RenderClear(r);
 
-    if (manager.hasNoEntities()) {
-        return;
+    if (manager.hasEntities()) {
+        manager.render();
+        SDL_RenderPresent(r);
     }
-
-    manager.render();
-
-    SDL_RenderPresent(r);
 }
 
 void Game::handleCameraMovement() {

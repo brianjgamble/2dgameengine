@@ -1,8 +1,8 @@
 #include "entity_manager.h"
 #include "components/collider_component.h"
 
-bool EntityManager::hasNoEntities() {
-    return entities.empty();
+bool EntityManager::hasEntities() {
+    return !entities.empty();
 }
 
 void EntityManager::update(float deltaTime) {
