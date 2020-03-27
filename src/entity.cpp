@@ -13,18 +13,19 @@ Entity::Entity(EntityManager& manager, std::string name, LayerType layer)
 
 Entity::~Entity() {
     components.clear();
-    componentTypeMap.clear();
 }
 
 void Entity::update(float deltaTime) {
-    for (auto& component : components) {
-        component->update(deltaTime);
+    for (auto& iter : components) {
+        auto comp = iter.second;
+        comp->update(deltaTime);
     }
 }
 
 void Entity::render() {
-    for (auto& component : components) {
-        component->render();
+    for (auto& iter : components) {
+        auto comp = iter.second;
+        comp->render();
     }
 }
 

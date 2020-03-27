@@ -28,27 +28,25 @@ class Entity {
 
     template<typename T, typename... TArgs> T& addComponent(TArgs&&... args) {
         T* newComponent(new T(std::forward<TArgs>(args)...));
-        newComponent->owner = this;
-        components.emplace_back(newComponent);
-        componentTypeMap[&typeid(*newComponent)] = newComponent;
+        newComponent->owner                = this;
+        components[&typeid(*newComponent)] = newComponent;
         newComponent->initialize();
         return *newComponent;
     }
 
     template<typename T> bool hasComponent() const {
-        return componentTypeMap.count(&typeid(T));
+        return components.count(&typeid(T));
     }
 
     template<typename T> T* getComponent() {
-        return static_cast<T*>(componentTypeMap[&typeid(T)]);
+        return static_cast<T*>(components[&typeid(T)]);
     }
 
   private:
     EntityManager& manager;
     bool active;
-    std::vector<Component*> components;
     std::string name;
-    std::map<const std::type_info*, Component*> componentTypeMap;
+    std::map<const std::type_info*, Component*> components;
     LayerType layer;
 };
 
