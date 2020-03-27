@@ -11,7 +11,7 @@ class Texture {
     explicit Texture(const std::string& fileName);
     ~Texture();
 
-    void draw(Rectangle srcRect, Rectangle destRect, SDL_RendererFlip flip);
+    void draw(Rectangle srcRect, Rectangle destRect);
 
   private:
     SDL_Texture* texture;

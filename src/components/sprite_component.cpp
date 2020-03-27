@@ -79,7 +79,7 @@ void SpriteComponent::update(float deltaTime) {
 }
 
 void SpriteComponent::render() {
-    texture->draw(sourceRectangle, destinationRectangle, spriteFlip);
+    texture->draw(sourceRectangle, destinationRectangle);
 }
 
 void SpriteComponent::animate(Movement movement) {

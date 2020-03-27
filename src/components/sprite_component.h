@@ -24,7 +24,6 @@ class SpriteComponent : public Component {
     Texture* texture;
     Rectangle sourceRectangle;
     Rectangle destinationRectangle;
-    SDL_RendererFlip spriteFlip = SDL_FLIP_NONE;
     TransformComponent* transform;
     bool isAnimated;
     unsigned int numFrames;

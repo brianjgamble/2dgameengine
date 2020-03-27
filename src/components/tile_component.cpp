@@ -21,5 +21,5 @@ void TileComponent::update(float deltaTime) {
 }
 
 void TileComponent::render() {
-    texture->draw(sourceRectangle, destinationRectangle, SDL_FLIP_NONE);
+    texture->draw(sourceRectangle, destinationRectangle);
 }
