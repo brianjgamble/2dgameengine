@@ -1,7 +1,5 @@
 #include "collider_component.h"
 
-#include <utility>
-
 ColliderComponent::ColliderComponent(std::string colliderTag, int x, int y,
                                      int width, int height) {
     this->colliderTag = std::move(colliderTag);

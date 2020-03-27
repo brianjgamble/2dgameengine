@@ -1,20 +1,17 @@
+#include "engine.h"
 #include "game.h"
-#include "video_manager.h"
 
-VideoManager videoManager;
+Engine engine;
 
 int main() {
-    // Start up the engine systems in the proper order
-    videoManager.startUp();
+    engine.startUp();
 
-    // Run the game
-    if (videoManager.isStarted()) {
+    if (engine.isRunning()) {
         Game game = Game {};
         game.run();
     }
 
-    // Shut down the engine systems in the reverse order
-    videoManager.shutDown();
+    engine.shutDown();
 
     return 0;
 }

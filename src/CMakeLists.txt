@@ -22,7 +22,8 @@ list(APPEND SOURCES
         locator.cpp
         video_manager.cpp
         texture.cpp
-        rectangle.cpp)
+        rectangle.cpp
+        engine.cpp)
 
 # Define source library
 add_library(sources_lib ${SOURCES})
