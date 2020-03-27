@@ -4,7 +4,6 @@
 #include "../../lib/glm/glm.hpp"
 #include "../rectangle.h"
 #include "component.h"
-#include <SDL_rect.h>
 
 class TransformComponent : public Component {
   public:
