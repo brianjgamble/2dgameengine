@@ -2,12 +2,11 @@
 #include "components/tile_component.h"
 #include "entity_manager.h"
 #include <fstream>
-#include <utility>
 
 extern EntityManager manager;
 
-Map::Map(std::string textureId, int scale, int tileSize) {
-    this->textureId = std::move(textureId);
+Map::Map(const std::string& textureId, int scale, int tileSize) {
+    this->textureId = textureId;
     this->scale     = scale;
     this->tileSize  = tileSize;
 }

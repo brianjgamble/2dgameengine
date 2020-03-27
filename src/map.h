@@ -5,7 +5,7 @@
 
 class Map {
   public:
-    Map(std::string textureId, int scale, int tileSize);
+    Map(const std::string& textureId, int scale, int tileSize);
     ~Map() = default;
 
     void loadMap(const std::string& filePath, int mapSizeX, int mapSizeY);
