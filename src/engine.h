@@ -8,6 +8,8 @@ class Engine {
     Engine()  = default;
     ~Engine() = default;
 
+    static Engine& get();
+
     void startUp();
     void shutDown();
     [[nodiscard]] bool isRunning() const;

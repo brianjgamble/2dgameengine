@@ -1,9 +1,8 @@
 #include "engine.h"
 #include "game.h"
 
-Engine engine;
-
 int main() {
+    auto engine = Engine::get();
     engine.startUp();
 
     if (engine.isRunning()) {
@@ -12,6 +11,5 @@ int main() {
     }
 
     engine.shutDown();
-
     return 0;
 }
