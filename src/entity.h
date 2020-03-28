@@ -2,7 +2,6 @@
 #define GAME_ENTITY_H
 
 #include "constants.h"
-//#include "entity_manager.h"
 #include "components/component_container.h"
 #include "rectangle.h"
 #include <map>
@@ -19,12 +18,14 @@ class Entity : public ComponentContainer {
 
     void update(float deltaTime);
     void render();
-    void destroy();
+
     [[nodiscard]] bool isActive() const;
+    void deactivate() override;
+
     [[nodiscard]] LayerType getLayer() const;
     [[nodiscard]] std::string getName() const;
+
     void moveCamera(Rectangle& camera);
-    void deactivate() override;
 
   private:
     EntityManager& manager;

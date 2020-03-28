@@ -28,12 +28,12 @@ void Entity::render() {
     }
 }
 
-void Entity::destroy() {
-    active = false;
-}
-
 bool Entity::isActive() const {
     return active;
+}
+
+void Entity::deactivate() {
+    active = false;
 }
 
 LayerType Entity::getLayer() const {
@@ -46,8 +46,4 @@ std::string Entity::getName() const {
 void Entity::moveCamera(Rectangle& camera) {
     auto* transform = getComponent<TransformComponent>();
     transform->center(camera);
-}
-
-void Entity::deactivate() {
-    active = false;
 }
