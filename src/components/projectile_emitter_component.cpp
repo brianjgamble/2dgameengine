@@ -21,7 +21,7 @@ void ProjectileEmitterComponent::update(float deltaTime) {
             transform->setPosition(origin);
         }
         else {
-            owner->destroy();
+            owner->deactivate();
         }
     }
 }

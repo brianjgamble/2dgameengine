@@ -1,18 +1,17 @@
 #ifndef GAME_ENTITY_H
 #define GAME_ENTITY_H
 
-#include "components/component.h"
 #include "constants.h"
-#include "entity_manager.h"
+//#include "entity_manager.h"
+#include "components/component_container.h"
+#include "rectangle.h"
 #include <map>
 #include <string>
 #include <vector>
-#include "rectangle.h"
 
-class Component;
 class EntityManager;
 
-class Entity {
+class Entity : public ComponentContainer {
   public:
     explicit Entity(EntityManager& manager);
     Entity(EntityManager& manager, std::string name, LayerType layer);
@@ -21,34 +20,16 @@ class Entity {
     void update(float deltaTime);
     void render();
     void destroy();
-    bool isActive() const;
-    LayerType getLayer() const;
-    std::string getName() const;
+    [[nodiscard]] bool isActive() const;
+    [[nodiscard]] LayerType getLayer() const;
+    [[nodiscard]] std::string getName() const;
     void moveCamera(Rectangle& camera);
-
-    template<typename T, typename... TArgs> T& addComponent(TArgs&&... args) {
-        T* newComponent(new T(std::forward<TArgs>(args)...));
-        newComponent->owner = this;
-        components.emplace_back(newComponent);
-        componentTypeMap[&typeid(*newComponent)] = newComponent;
-        newComponent->initialize();
-        return *newComponent;
-    }
-
-    template<typename T> bool hasComponent() const {
-        return componentTypeMap.count(&typeid(T));
-    }
-
-    template<typename T> T* getComponent() {
-        return static_cast<T*>(componentTypeMap[&typeid(T)]);
-    }
+    void deactivate() override;
 
   private:
     EntityManager& manager;
     bool active;
-    std::vector<Component*> components;
     std::string name;
-    std::map<const std::type_info*, Component*> componentTypeMap;
     LayerType layer;
 };
 

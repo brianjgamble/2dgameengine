@@ -1,11 +1,11 @@
 #ifndef GAME_COMPONENT_H
 #define GAME_COMPONENT_H
 
-class Entity;
+class ComponentContainer;
 
 class Component {
   public:
-    Entity* owner;
+    ComponentContainer* owner;
 
     virtual ~Component() = default;
 

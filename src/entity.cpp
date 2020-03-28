@@ -47,3 +47,7 @@ void Entity::moveCamera(Rectangle& camera) {
     auto* transform = getComponent<TransformComponent>();
     transform->center(camera);
 }
+
+void Entity::deactivate() {
+    active = false;
+}
